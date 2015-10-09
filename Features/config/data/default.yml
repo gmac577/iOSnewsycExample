@@ -1,0 +1,35 @@
+## Login/Profile
+valid:
+  Username: waynegee211
+  Password: geebiz211
+invalidname:
+  Username: waynegeezy211
+  Password: geebiz211
+invalidpass:
+  Username: waynegee211
+  Password: sneezer321
+blankname:
+  Username: ''
+  Password: sneezer321
+blankpass:
+  Username: waynegee211
+  Password: ''
+currentname: 
+  Username: "waynegee211"
+currentpass:
+  Password: "geebiz211"
+
+## Posts/Comments
+first_reply_text:
+  postTextView: "This is the first hacker comment"
+second_reply_text:
+  postTextView: "This is the second hacker comment"
+third_reply_text:
+  postTextView: "This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all."
+fourth_reply_text:
+  postTextView: "This is another hacker comment"
+fifth_reply_text:
+  postTextView: "This is the last and final hacker comment"
+last_reply_text:
+  postText: "This is a long comment to verify that we can see the whole comment and not just part of the comment or some of the comment but all of the comment.  The End."
+
