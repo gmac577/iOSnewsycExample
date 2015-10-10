@@ -19,6 +19,8 @@ class NavTabBarPage < Calabash::IBase
     @@progress = "label {text LIKE '*Continue*'}"
     @@noprogress = "label {text LIKE '*Cancel*'}" 
     @@doflag = "label {text LIKE '*Flag*'}" 
+    @@submitter = "label {text LIKE '*Submitter*'}" 
+
 
     def select_storytab(index)
         case index
@@ -53,10 +55,14 @@ class NavTabBarPage < Calabash::IBase
   		    when "Cancel" then
   		  	 touch(@@noprogress)
   		  	 touch(@@back)
-          end
+         	end
 	end
 
+	def sub_handler
+			touch(@@submitter)
+  	end
 
+	
 
 
 

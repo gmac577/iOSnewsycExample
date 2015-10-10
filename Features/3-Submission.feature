@@ -61,31 +61,27 @@ Scenario:  Flag a story
 
 @subaction
 Scenario:  View the submitter of the story you've read and see their submissions and comments
-  Given I am on the Main Feed screen
-  When I touch Profile on the tab bar
-  And I am on the Login screen
-  And I enter "valid" login credentials
-  And I pause 5 seconds
+  #Given I am on the Main Feed screen
+  #When I touch Profile on the tab bar
+  #And I am on the Login screen
+  #And I enter "valid" login credentials
+  #And I pause 5 seconds
+  #And I am on the Main Feed screen
+  #And I touch the second post
+  #And I am on the Submission screen
+  #And I touch Action on the tab bar
+  #And I touch Cancel on the menu
   And I am on the Main Feed screen
   And I touch the second post
   And I am on the Submission screen
-
-  And I touch Action on the tab bar
-  And I touch Cancel on the menu
-  And I am on the Main Feed screen
-  And I touch the second post
-  And I am on the Submission screen
-  
   And I touch Action on the tab bar
   And I touch Submitter on the menu
-  And I see the total for "karma"
-  And I see the total for "average"
-  And I touch Submisions
-  And I touch Comments
+  And I see the totals for karma and average
+  And I touch the Submissions header
+  And I touch the Comments header
+  And I touch the Submission arrow
   And I am on the Submission screen
 
-
-  Then I am on the Main Feed screen
 
 
 

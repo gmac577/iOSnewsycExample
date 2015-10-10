@@ -104,6 +104,15 @@ end
 Given(/^I see "(.*?)" notification count$/) do |count|
   page(TabBarPage).verify_notification_count(count)
 end
+Given(/^I touch (Flag|Cancel) on the menu$/) do |action|
+  page(NavTabBarPage).flag_handler(action)
+end
+Given(/^I touch Continue$/) do
+  page(NavTabBarPage).progess_on
+end
+Given(/^I touch Submitter on the menu$/) do
+   page(NavTabBarPage).sub_handler
+end
 #############################
 ########                    #
 ########    Submission      #
@@ -122,16 +131,15 @@ end
 Given(/^I pause 5 seconds$/) do 
   page(SubmissionPage).pause
 end
-Given(/I touch (Flag|Cancel|Submitter) on the menu$/) do |action|
-  page(NavTabBarPage).flag_handler(action)
+Given(/^I touch the (Submissions|Comments) header$/) do |choice|
+  page(SubmissionPage).select_action(choice)
 end
-Given(/I touch Continue$/) do
-  page(NavTabBarPage).progess_on
+Given(/^I touch the Submission arrow$/) do 
+  page(SubmissionPage).touch_sub
 end
-
-
-
-
+Given(/^I see the totals for karma and average$/) do
+  page(SubmissionPage).verify_page_elements
+end
 
 
 
