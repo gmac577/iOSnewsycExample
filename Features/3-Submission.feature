@@ -61,16 +61,16 @@ Scenario:  Flag a story
 
 @subaction
 Scenario:  View the submitter of the story you've read and see their submissions and comments
-  #Given I am on the Main Feed screen
-  #When I touch Profile on the tab bar
-  #And I am on the Login screen
-  #And I enter "valid" login credentials
-  #And I pause 5 seconds
-  #And I am on the Main Feed screen
-  #And I touch the second post
-  #And I am on the Submission screen
-  #And I touch Action on the tab bar
-  #And I touch Cancel on the menu
+  Given I am on the Main Feed screen
+  When I touch Profile on the tab bar
+  And I am on the Login screen
+  And I enter "valid" login credentials
+  And I pause 5 seconds
+  And I am on the Main Feed screen
+  And I touch the second post
+  And I am on the Submission screen
+  And I touch Action on the tab bar
+  And I touch Cancel on the menu
   And I am on the Main Feed screen
   And I touch the second post
   And I am on the Submission screen
