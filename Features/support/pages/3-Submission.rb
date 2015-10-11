@@ -28,6 +28,17 @@ class SubmissionPage < Calabash::IBase
     @@submission = "label {text LIKE '*Submission*'}"
     @@comments = "tableViewCell {text LIKE '*Comments*'}"
     @@prof = "label {text LIKE '*Profile*'}"
+    @@share = "label {text LIKE '*Share*'}"
+
+    @@mail = "label {text LIKE '*Mail*'}"
+    @@reminder = "label {text LIKE '*Reminders*'}"
+    @@more = "label {text LIKE '*More*'} index:0"
+    @@moremore = "label {text LIKE '*More*'} index:1"
+    @@add = "label {text LIKE '*Add to Reading List*'}"
+    @@copy = "label {text LIKE '*Copy*'}"
+    @@readlater = "label {text LIKE '*Read Later*'}"
+    @@open = "label {text LIKE '*Open in Safari*'}"
+
 
 
 	def pause
@@ -64,6 +75,50 @@ class SubmissionPage < Calabash::IBase
             	    sleep 3
             		touch(@@prof)
         end
+    end
+
+     def select_share_action(choice)
+        case choice
+            when "Mail" then 
+            		touch(@@Mail)
+            		sleep 3
+            		touch(@@prof)
+            when "Reminders" then 
+            		touch(@@reminder)
+            		sleep 3
+            		touch(@@prof)
+            when "More" then
+            	    touch(@@more)
+            	    sleep 3
+            		touch(@@prof)
+            when "Add" then 
+            		touch(@@add)
+            		sleep 3
+            		touch(@@prof)
+            when "Copy" then 
+            		touch(@@copy)
+            		sleep 3
+            		touch(@@prof)
+            when "Read" then
+            	    touch(@@readlater)
+            	    sleep 3
+            		touch(@@prof)
+            when "Open" then 
+            		slide_over
+            		touch(@@open)
+            		sleep 3
+            		touch(@@prof)
+             when "More2" then 
+             		slide_over
+             		slide_over
+            		touch(@@moremore)
+            		sleep 3
+            		touch(@@prof)
+        end
+    end
+
+    def slide_over
+    	swipe "left", {:query => "collectionView"}
     end
 
     def touch_sub

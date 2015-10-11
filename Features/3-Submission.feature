@@ -83,7 +83,17 @@ Scenario:  View the submitter of the story you've read and see their submissions
   And I am on the Submission screen
 
 
-
+@subshare
+Scenario:  Sharing a story you've read athrough various ways via ShareSheets
+  Given I am on the Main Feed screen
+  When I touch Profile on the tab bar
+  And I am on the Login screen
+  And I enter "valid" login credentials
+  And I pause 5 seconds
+  And I am on the Main Feed screen
+  And I touch the second post
+  And I am on the Submission screen
+  And I touch the Share button
 
 
 
