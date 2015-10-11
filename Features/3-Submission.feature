@@ -23,7 +23,7 @@ Scenario:  Post a reply to stories on the Main feed
   And I create a reply post
   And I touch Cancel
   And I touch the Discard button
-  Then I am on the Submission screen
+  And I am on the Submission screen
 
 
 @subvote

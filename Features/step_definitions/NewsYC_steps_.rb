@@ -140,6 +140,8 @@ end
 Given(/^I see the totals for karma and average$/) do
   page(SubmissionPage).verify_page_elements
 end
-
+Given(/^I touch the Discard button$/) do
+  page(SubmissionPage).touch_discard
+end
 
 
