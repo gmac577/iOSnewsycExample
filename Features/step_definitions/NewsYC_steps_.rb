@@ -67,29 +67,7 @@ end
 Given(/^I can bla the bla bla bla-bla-bla$/) do 
   page(BlaOnePage).bla_bla_bla(bla)
 end
-#############################
-########                    #
-########  The More Screen   #
-########                    #
-#############################
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
+
 #############################
 ########                    #
 ########    Footer          #
@@ -143,5 +121,8 @@ end
 Given(/^I touch the Discard button$/) do
   page(SubmissionPage).touch_discard
 end
-
+Given(/^I touch the (Mail|Reminders|More|More2|Add|Copy|Read|Open) button$/) do |choice|
+  page(SubmissionPage).select_share_action(choice)
+end
+    
 

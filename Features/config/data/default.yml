@@ -18,16 +18,22 @@ currentname:
   Username: "waynegee211"
 currentpass:
   Password: "geebiz211"
+fullname: 
+  fullNameField: "Wayne Milton"
+email:
+  EmailField: "wmilton@riis.com"
 
-## Posts/Comments
-first_reply_text:
-  postTextView: "This is the first hacker comment"
-second_reply_text:
-  postTextView: "This is the second hacker comment"
+## Submission/Posts/Comments
+mail_reply_text:
+  postTextView: "This is a comment for the email. It says Gleeben-globben-glowben. That is all."
+mail_subject:
+  postTextView: "This is the mail subject entry"
+reminder_text:
+  postTextView: "This is text for the reminder entry"
 third_reply_text:
   postTextView: "This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all."
-fourth_reply_text:
-  postTextView: "This is another hacker comment"
+notes_text:
+  postTextView: "This is a notes comment"
 fifth_reply_text:
   postTextView: "This is the last and final hacker comment"
 last_reply_text:

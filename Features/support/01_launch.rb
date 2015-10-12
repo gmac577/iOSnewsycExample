@@ -9,8 +9,9 @@ require 'calabash-cucumber/launcher'
 # or set the environment variable APP_BUNDLE_PATH
 
 Before do |scenario|
+  ENV['RESET_BETWEEN_SCENARIOS'] = '1'
   @calabash_launcher = Calabash::Cucumber::Launcher.new
- # @calabash_launcher.reset_simulator_content_and_settings
+  @calabash_launcher.reset_simulator_content_and_settings
   unless @calabash_launcher.calabash_no_launch?
     launch_options = {:uia_strategy => :shared_element}
     @calabash_launcher.relaunch(launch_options)
