@@ -29,8 +29,7 @@ class SubmissionPage < Calabash::IBase
     @@comments = "tableViewCell {text LIKE '*Comments*'}"
     @@prof = "label {text LIKE '*Profile*'}"
     @@share = "label {text LIKE '*Share*'}"
-
-    @@mail = "label {text LIKE '*Mail*'}"
+	@@mail = "label {text LIKE '*Mail*'}"
     @@reminder = "label {text LIKE '*Reminders*'}"
     @@more = "label {text LIKE '*More*'} index:0"
     @@moremore = "label {text LIKE '*More*'} index:1"
@@ -38,7 +37,10 @@ class SubmissionPage < Calabash::IBase
     @@copy = "label {text LIKE '*Copy*'}"
     @@readlater = "label {text LIKE '*Read Later*'}"
     @@open = "label {text LIKE '*Open in Safari*'}"
-
+    @@searchbar = "fieldEditor index:0"
+    @@searchtext = "Microsoft"
+    @@getsearch = "searchBarTextFieldLabel {text LIKE '*Search*'}"
+    
 
 
 	def pause
@@ -117,6 +119,8 @@ class SubmissionPage < Calabash::IBase
         end
     end
 
+    def
+
     def slide_over
     	swipe "left", {:query => "collectionView"}
     end
@@ -126,13 +130,28 @@ class SubmissionPage < Calabash::IBase
     	touch(@@submission)
     end
 
-    def create_post
-        sleep 2
-        res = query(@@textview)
-  			if res
-        		set_text(@@textview, @@text_value)
-  			end
-	end
+    #def create_post
+    #    sleep 2
+    #    res = query(@@textview)
+    #		if res
+    #    		set_text(@@textview, @@text_value)
+  	#		end
+	#end
     
+
+	def create_post(action)
+        sleep 2
+        case action
+            when "reply post" then 
+            		set_text(@@textview, @@text_value)
+            when "search query" then 
+            		touch(@@getsearch)
+            		sleep 3
+            		set_text("fieldEditor index:0", @@searchtext)
+            		sleep 5
+            		keyboard_enter_char "Return"
+         end
+    end
+
 end
 

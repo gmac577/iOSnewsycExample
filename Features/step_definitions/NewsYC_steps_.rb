@@ -30,11 +30,17 @@ end
 Given(/^I am on the Main Feed screen$/) do
   page(FeedDetailsPage).await
 end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
+Given(/^I am on the New screen$/) do
+  page(FeedDetailsPage).see_new
 end
 Given(/^I touch the second post$/) do
   page(FeedDetailsPage).touch_row
+end
+Given(/^I verify I see "(.*?)" in the story text$/) do |searchtext|
+  page(FeedDetailsPage).view_search(searchtext)
+end
+Given(/^I touch Recent on the header$/) do
+  page(FeedDetailsPage).touch_rec
 end
 #############################
 ########                    #
@@ -103,8 +109,8 @@ end
 Given(/^I touch the Back arrow$/) do
   page(SubmissionPage).touch_back
 end
-Given(/^I create a reply post$/) do
-  page(SubmissionPage).create_post
+Given(/^I create a (reply post|search query)$/) do |action|
+  page(SubmissionPage).create_post(action)
 end
 Given(/^I pause 5 seconds$/) do 
   page(SubmissionPage).pause
@@ -124,5 +130,4 @@ end
 Given(/^I touch the (Mail|Reminders|More|More2|Add|Copy|Read|Open) button$/) do |choice|
   page(SubmissionPage).select_share_action(choice)
 end
-    
 

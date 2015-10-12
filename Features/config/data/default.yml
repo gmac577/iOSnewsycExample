@@ -34,8 +34,10 @@ third_reply_text:
   postTextView: "This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all. This is a news submission. It says Gleeben-globben-glowben. That is all."
 notes_text:
   postTextView: "This is a notes comment"
-fifth_reply_text:
-  postTextView: "This is the last and final hacker comment"
-last_reply_text:
+search_text:
+  postTextView: "Microsoft"
+title_text:
+  title: "The title will go here"
+body_contents:
   postText: "This is a long comment to verify that we can see the whole comment and not just part of the comment or some of the comment but all of the comment.  The End."
 

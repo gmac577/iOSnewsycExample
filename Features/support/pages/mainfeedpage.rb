@@ -17,6 +17,11 @@ class FeedDetailsPage < Calabash::IBase
     @@storycell = "SubmissionTableCell"
     @@compose = "navigationButton index:0"
     @@story = "tableViewCell index:1"
+    @@new = "label {text LIKE '*New Submissions*'}"
+    @@searchbar = "fieldEditor index:0"
+    @@searchtext = "Microsoft"
+    @@reclabel = "label {text LIKE '*Recent*'}"
+
    
     def verify_feed_elements
         wait_for_elements_exist([@@feedtable], :timeout => 10)
@@ -28,6 +33,27 @@ class FeedDetailsPage < Calabash::IBase
          touch(@@story)
     end
 
+    def touch_rec
+        touch(@@reclabel)
+    end
+
+    def see_new
+        wait_for_elements_exist(@@new, :timeout => 10)
+        self
+    end
+
+    def view_search(searchtext)
+        section=0
+        #scroll_to_cell(:row => 0, :section => 0)  #scroll to top of table
+        sleep 1
+#Below code loops through each cell to check if the appropriate text was found
+        each_cell(:animate => false, :post_scroll => 0.2) do |row, sec|
+            if query("tableViewCell indexPath:#{row},#{sec} label", :searchtext).first==searchtext
+                break # if text found break from loop
+            end
+        section=section+1
+       end
+    end
 
 
 
