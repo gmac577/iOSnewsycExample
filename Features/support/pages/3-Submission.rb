@@ -40,6 +40,9 @@ class SubmissionPage < Calabash::IBase
     @@searchbar = "fieldEditor index:0"
     @@searchtext = "Microsoft"
     @@getsearch = "searchBarTextFieldLabel {text LIKE '*Search*'}"
+    @@progress = "label {text LIKE '*Continue*'}"
+    @@retry = "label index:1"
+    @@headhome = "label index:0"
     
 
 
@@ -62,8 +65,14 @@ class SubmissionPage < Calabash::IBase
 
 	def verify_page_elements
 		sleep 4
-        wait_for_elements_exist([@@karma], :timeout => 10)
-        wait_for_elements_exist([@@average], :timeout => 10)
+        if
+          wait_for_elements_exist([@@karma], :timeout => 10)
+          wait_for_elements_exist([@@average], :timeout => 10)
+        end
+        if
+          wait_for_elements_exist([@@retry], :timeout => 10)
+          touch(@@submission)
+        end
     end
 
      def select_action(choice)

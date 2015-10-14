@@ -9,6 +9,7 @@ def title
 end
 
 def await(opts={})
+    sleep 2
     wait_for_elements_exist([title], :timeout => 3)
         self
 end
@@ -25,6 +26,7 @@ def login(type)
 	touch(@@username)
 	populate_page_with "#{type}"
   keyboard_enter_char("Return")
+  sleep 5
 end
 
 def signin
