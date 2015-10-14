@@ -1,6 +1,6 @@
 require 'calabash-cucumber/ibase'
 
-class SubmissionPage < Calabash::IBase
+class MorePage < Calabash::IBase
 
     include FormHelper
     include PagePopulator  
@@ -99,60 +99,75 @@ class SubmissionPage < Calabash::IBase
         end
     end
 
-     def select_action(choice)
+     def select_more_actions(choice)
         case choice
-            when "Submissions" then 
-            		touch(@@submissions)
+            when "Hacker News" then 
+                    sleep 3
+                    touch([@@back])
+            when "Best Submissions" then 
             		sleep 3
-            		touch(@@prof)
-            when "Comments" then
-            	    touch(@@comments)
+            		touch([@@bestsublabel])
+            when "Active Discussions" then 
+            		sleep 3
+            		touch([@@activelabel])
+            when "Classic View" then
             	    sleep 3
-            		touch(@@prof)
+            		touch([@@classic])
+            when "Ask HN" then 
+            		sleep 3
+            		touch([@@askhn])
+            when "Best Comments" then 
+            		sleep 3
+            		wait_for_elements_exist([@@karma], :timeout => 10)
+            when "New Comments" then
+            	    sleep 3
+            		wait_for_elements_exist([@@karma], :timeout => 10)
+            when "Hacker News FAQ" then 
+            		sleep 3
+            		wait_for_elements_exist([@@karma], :timeout => 10)
+             when "news:yc homepage" then 
+             		sleep 3
+            		wait_for_elements_exist([@@karma], :timeout => 10)
+             when "@news:yc Twitter" then 
+                    sleep 3
+                    wait_for_elements_exist([@@karma], :timeout => 10)
         end
     end
 
-     def select_share_action(choice)
+        def page_handler(page)
         case choice
-            when "Mail" then 
-            		touch(@@Mail)
-            		sleep 3
-            		touch(@@prof)
-            when "Reminders" then 
-            		touch(@@reminder)
-            		sleep 3
-            		touch(@@prof)
-            when "More" then
-            	    touch(@@more)
-            	    sleep 3
-            		touch(@@prof)
-            when "Add" then 
-            		touch(@@add)
-            		sleep 3
-            		touch(@@prof)
-            when "Copy" then 
-            		touch(@@copy)
-            		sleep 3
-            		touch(@@prof)
-            when "Read" then
-            	    touch(@@readlater)
-            	    sleep 3
-            		touch(@@prof)
-            when "Open" then 
-            		slide_over
-            		touch(@@open)
-            		sleep 3
-            		touch(@@prof)
-             when "More2" then 
-             		slide_over
-             		slide_over
-            		touch(@@moremore)
-            		sleep 3
-            		touch(@@prof)
+            when "Hacker News" then 
+                    sleep 3
+                    wait_for_elements_exist([@@back], :timeout => 10)
+            when "Best Submissions" then 
+                    sleep 3
+                    wait_for_elements_exist([@@bestsublabel], :timeout => 10)
+            when "Active Discussions" then 
+                    sleep 3
+                    wait_for_elements_exist([@@activelabel], :timeout => 10)
+            when "Classic View" then
+                    sleep 3
+                    wait_for_elements_exist([@@classic], :timeout => 10)
+            when "Ask HN" then 
+                    sleep 3
+                    wait_for_elements_exist([@@asklabel], :timeout => 10)
+            when "Best Comments" then 
+                    sleep 3
+                    wait_for_elements_exist([@@bestcom], :timeout => 10)
+            when "New Comments" then
+                    sleep 3
+                    wait_for_elements_exist([@@newcom], :timeout => 10)
+            when "Hacker News FAQ" then 
+                    sleep 3
+                    wait_for_elements_exist([@@faqlabel], :timeout => 10)
+             when "news:yc homepage" then 
+                    sleep 3
+                    wait_for_elements_exist([@@home], :timeout => 10)
+             when "@news:yc Twitter" then 
+                    sleep 3
+                    wait_for_elements_exist([@@tweet], :timeout => 10)
         end
     end
-
-    def
 
     def slide_over
     	swipe "left", {:query => "collectionView"}

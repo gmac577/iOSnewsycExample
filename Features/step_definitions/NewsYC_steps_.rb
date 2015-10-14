@@ -68,18 +68,16 @@ Given(/^I successfully submit a Text$/) do
 end
 #############################
 ########                    #
-########  New Story Feed    #
+########  More              #
 ########                    #
 #############################
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
+Given(/^I touch (Best Submissions|Active Discussions|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter)$/) do |choice|
+  page(MorePage).select_more_actions(choice)
 end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
+Given(/^I am on the (Hacker News|Best Submissions|Active Discussions|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter)$/) do |page|
+ page(MorePage).page_handler(page)
 end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
+
 #############################
 ########                    #
 ########  Search            #

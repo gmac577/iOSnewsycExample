@@ -9,13 +9,12 @@ Background:
   When I touch More on the tab bar
   And I am on the Hacker News menu page
  
-
 @wip
 @morebest
 Scenario: Reading the best submissions by news:yc users
   And I touch Best Submissions
   And I am on the Best Submissions page
-  And I touch the first post
+  And I touch the second post
   And I am on the Submission page
   And I touch the page and I see the subtabbar
   And I touch the Best Submissions header
@@ -28,7 +27,7 @@ Scenario: Reading the best submissions by news:yc users
   Scenario: Reading the active discussions by news:yc users
   And I touch Active Discussions
   And I am on the Active Discussions page
-  And I touch the first post
+  And I touch the second post
   And I am on the Active page
   And I touch the page and I see the subtabbar
   And I touch Active
@@ -41,7 +40,7 @@ Scenario: Reading the best submissions by news:yc users
   Scenario: Reading the archived submissions by news:yc users
   And I touch Classic View
   And I am on the Classic View page
-  And I touch the first post
+  And I touch the second post
   And I am on the Submission page
   And I touch the page and I see the subtabbar
   And I touch Classic
@@ -54,7 +53,7 @@ Scenario: Reading the best submissions by news:yc users
   Scenario: Reading the questions posted by news:yc users
   And I touch Ask HN
   And I am on the Ask HN page
-  And I touch the first post
+  And I touch the second post
   And I am on the Submission page
   And I touch the page and I see the subtabbar
   And I touch Ask HN on the header
@@ -68,7 +67,7 @@ Scenario: Reading the best submissions by news:yc users
   Scenario: Reading the best comments posted by news:yc users
   And I touch Best Comments
   And I am on the Best Comments page
-  And I touch the first post
+  And I touch the second post
   And I am on the Comments page
   And I touch the page and I see the subtabbar
   And I touch Hacker News
@@ -79,13 +78,13 @@ Scenario: Reading the best submissions by news:yc users
   Scenario: Reading the newest comments posted by news:yc users
   And I touch New Comments
   And I am on the New Comments page
-  And I touch the first post
+  And I touch the second post
   And I am on the Comments page
   And I touch the page and I see the subtabbar
   And I touch Hacker News
   And I am on the Hacker News menu page
 
-  
+
 @wip
   @morefaq
   Scenario: Reading the Hacker News FAQ and using the various social media options
