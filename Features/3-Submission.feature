@@ -28,22 +28,13 @@ Scenario:  Flag a story
  And I succesfully flag a story   
  Then I am on the Main Feed screen
 
-#NOTE As of 10/13, Hacker News has blocked access to USER/SUBMITTER profiles. I have commented out this section until further notice.
 @subaction
 Scenario:  View the submitter's profile of the story you've read and see their submissions and comments
-  #And I navigte to a user's profile 
-  #Then I am on the Main Feed screen
+  Then I navigte to a user's profile 
 
 #NOTE:The Mail app via Share Sheets crashes on the sim so there is currently no way to test this fuctionality; will test on the iPhone. 
-#NOTE: Share Sheets cannot be accessed via the sim with automation; must be tested manually. Including the scenario for demonstration.  
+#NOTE: Share Sheets cannot be accessed via the sim with automation; must be tested manually. Including the scenario in the newsYC_steps.  
 
-#@subshare
-#Scenario:  Sharing a story you've read athrough various ways via ShareSheets
-  #And I touch the Share button
-  #And I successfully send an email
-  #And I successfully send a reminder
-  #And I test the rest of the Share Sheet options
-  #Then I am on the Submission screen
 
 
 

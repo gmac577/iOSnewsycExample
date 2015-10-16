@@ -29,25 +29,16 @@ Scenario: Login
   When I touch Profile on the tab bar
   And I am on the Login screen
   And I enter "valid" login credentials
-  And I pause 5 seconds
   Then I am on the Main Feed screen
 
 @searchmain
 Scenario: Search
   When I touch Search on the tab bar
-  And I create a search query
-  And I verify I see "Microsoft" in the story text
-  And I touch Recent on the header
-  And I verify I see "Microsoft" in the story text
+  And I create a successful search
   And I touch Home on the tab bar
   Then I am on the Main Feed screen
 
-@wip
-@sharemain
-Scenario: Sharing a URL or a text 
-  When I successfully submit an URL
-  And I successfully submit a Text
-  Then I am on the Main Feed screen
+
 
 
 

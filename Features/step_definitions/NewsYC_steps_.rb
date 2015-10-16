@@ -49,6 +49,12 @@ end
 Given(/^I touch Recent on the header$/) do
   page(FeedDetailsPage).touch_rec
 end
+Given(/^I create a successful search$/) do
+  step "I create a search query"
+  step 'I verify I see "Microsoft" in the story text'
+  step "I touch Recent on the header"
+  step 'I verify I see "Microsoft" in the story text'
+end
 Given(/^I successfully submit an URL$/) do
   step "I touch Share on the header"
   step "I touch Submit URL"
@@ -71,13 +77,27 @@ end
 ########  More              #
 ########                    #
 #############################
-Given(/^I touch (Best Submissions|Active Discussions|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter)$/) do |choice|
+Given(/^I touch (Best Submissions|Active Discussions|Active|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter)$/) do |choice|
   page(MorePage).select_more_actions(choice)
 end
-Given(/^I am on the (Hacker News|Best Submissions|Active Discussions|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter)$/) do |page|
+Given(/^I am on the (Hacker News|Best Submissions|Submission|Active Discussions|Active|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter) page$/) do |page|
  page(MorePage).page_handler(page)
 end
-
+Given(/^I am on the Hacker News menu page$/) do
+  page(MorePage).seemenu
+end
+Given(/^I touch the page$/) do
+  page(MorePage).table_view
+end
+Given(/^I see the subtabbar$/) do
+  page(MorePage).find_item
+end  
+Given(/^I touch the story title to read the full article$/) do
+  page(MorePage).story_time
+end
+Given(/^I return to the previous screen$/) do
+  page(MorePage).touch_goback
+end  
 #############################
 ########                    #
 ########  Search            #

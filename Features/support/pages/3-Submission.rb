@@ -79,6 +79,7 @@ class SubmissionPage < Calabash::IBase
         case choice
             when "Submissions" then 
             		touch(@@submissions)
+                    puts @@submissions
             		sleep 3
             		touch(@@prof)
             when "Comments" then
