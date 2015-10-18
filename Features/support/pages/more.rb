@@ -25,58 +25,55 @@ class MorePage < Calabash::IBase
     @@faq = "tableViewCell {text LIKE '*Hacker News FAQ*'}"
     @@home = "tableViewCell {text LIKE '*news:yc homepage*'}"
     @@tweet = "tableViewCell {text LIKE '*@newsyc_*'}"
-    @@goback = "label {text LIKE 'Back'}"
+    @@goback = "label {text LIKE '*Back*'}"
+    @@com = "label {text LIKE 'Comments'}"
     #@@goback = "button index:0"
     @@bestsublabel = "label {text LIKE '*Best Submissions*'}"
     @@subtitle = "label {text LIKE '*Submission*'}"
     @@activelabel = "label {text LIKE '*Active*'}"
+    @@classiclabel = "label {text LIKE '*Classic*'}"
     @@asklabel = "label {text LIKE '*Ask HN*'}"
     @@faqlabel = "label {text LIKE '*Hacker News FAQ*'}"
-    @@tableviewer = "TableViewCellView"
+    @@detailsheader = "DetailsHeaderView"
+    @@tableviewer = "BodyTextRenderView"
     @@readability = "button index:2"
     @@refresh = "button index:3"
     @@moreactions = "button index:4"
-    @@hnfaqlabel = "label {text LIKE '*Hacker News FAQ — news.ycombinator.com*'}"
-
-   	
-
-    @@cancel = "label {text LIKE 'Cancel'}"
-   	
-   	@@reply = "label {text LIKE '*Reply*'}"
-    @@textview = "view index:6"
-    @@text_value = "This is a news submission. It says Gleeben-globben-glowben. That is all."
-    @@discard = "label {text LIKE '*Discard*'}"
-    @@karma = "tableViewCell {text LIKE '*karma*'}"
-    @@average = "tableViewCell {text LIKE '*average*'}"
-    @@submissions = "tableViewCell {text LIKE '*Submissions*'}"
-    @@submission = "label {text LIKE '*Submission*'}"
-    @@comments = "tableViewCell {text LIKE '*Comments*'}"
-    @@prof = "label {text LIKE '*Profile*'}"
-    @@share = "label {text LIKE '*Share*'}"
-	@@mail = "label {text LIKE '*Mail*'}"
-    @@reminder = "label {text LIKE '*Reminders*'}"
-    @@more = "label {text LIKE '*More*'} index:0"
-    @@moremore = "label {text LIKE '*More*'} index:1"
-    @@add = "label {text LIKE '*Add to Reading List*'}"
-    @@copy = "label {text LIKE '*Copy*'}"
-    @@readlater = "label {text LIKE '*Read Later*'}"
-    @@open = "label {text LIKE '*Open in Safari*'}"
-    @@searchbar = "fieldEditor index:0"
-    @@searchtext = "Microsoft"
-    @@getsearch = "searchBarTextFieldLabel {text LIKE '*Search*'}"
+    @@hnfaqlabel = "label {text LIKE '*Hacker News FAQ*'}"
+    @@newsychome = "label {text LIKE '*Meet news:yc.*'}"
+    @@tweethome = "label {text LIKE 'news:yc (@newsyc_) | Twitter'}"
+    @@reply = "button index:0"
+    @@backbutton = "label {text LIKE 'back7'}"
+    @@body = "label {text LIKE '*tableView*'}"
+    @@backbtn = "NavigationBarBackIndicatorView"
+    @@detailstitle = "label index:1"
+    @@subflag = "toolbarButton index:2"
+    @@doflag = "label {text LIKE '*Flag*'}" 
     @@progress = "label {text LIKE '*Continue*'}"
-    @@retry = "label index:1"
-    @@headhome = "label index:0"
-    
-
-
-	def pause
+    @@noprogress = "label {text LIKE '*Cancel*'}"
+  
+    def pause
       	sleep 5
     end
 	
-	def touch_back
+    def touch_subflag
+        wait_for_elements_exist([@@subflag], :timeout => 10)
+         #puts "here we go"
+          touch(@@subflag)
+        sleep 5
+        touch(@@doflag)
+        sleep 3
+        touch(@@progress)   
+	end
+
+    def touch_goback
 	  sleep 5
-      touch(@@back)
+      touch(@@goback)
+    end
+
+    def backpage
+      touch(nil, :offset => {:x => 8, :y => 26})
+      sleep 5
     end
 
     def touch_discard
@@ -106,10 +103,10 @@ class MorePage < Calabash::IBase
                     touch([@@back])
             when "Best Submissions" then 
             		sleep 3
-            		touch([@@bestsublabel])
+            		touch([@@bestsub])
             when "Active Discussions" then 
             		sleep 3
-            		touch([@@activelabel])
+            		touch([@@active])
             when "Classic View" then
             	    sleep 3
             		touch([@@classic])
@@ -118,55 +115,118 @@ class MorePage < Calabash::IBase
             		touch([@@askhn])
             when "Best Comments" then 
             		sleep 3
-            		wait_for_elements_exist([@@karma], :timeout => 10)
+            		touch([@@bestcom])
             when "New Comments" then
             	    sleep 3
-            		wait_for_elements_exist([@@karma], :timeout => 10)
+            		touch([@@newcom])
             when "Hacker News FAQ" then 
-            		sleep 3
-            		wait_for_elements_exist([@@karma], :timeout => 10)
-             when "news:yc homepage" then 
-             		sleep 3
-            		wait_for_elements_exist([@@karma], :timeout => 10)
-             when "@news:yc Twitter" then 
+                    scroll_to_row "tableView", 4
+                    sleep 5
                     sleep 3
-                    wait_for_elements_exist([@@karma], :timeout => 10)
+            		touch([@@faq])
+             when "news:yc homepage" then 
+                    scroll_to_row "tableView", 4
+             		sleep 5
+            		touch([@@home])
+                    sleep 5
+             when "@news:yc Twitter" then 
+                    scroll_to_row "tableView", 4
+                    sleep 5
+                    sleep 3
+                    touch([@@tweet])
         end
     end
 
         def page_handler(page)
-        case choice
+        case page
             when "Hacker News" then 
                     sleep 3
                     wait_for_elements_exist([@@back], :timeout => 10)
             when "Best Submissions" then 
                     sleep 3
                     wait_for_elements_exist([@@bestsublabel], :timeout => 10)
+            when "Submission" then 
+                    sleep 3
+                    wait_for_elements_exist([@@subtitle], :timeout => 10)
+                    #touch_goback
             when "Active Discussions" then 
                     sleep 3
                     wait_for_elements_exist([@@activelabel], :timeout => 10)
             when "Classic View" then
                     sleep 3
-                    wait_for_elements_exist([@@classic], :timeout => 10)
+                    wait_for_elements_exist([@@classiclabel], :timeout => 10)
             when "Ask HN" then 
                     sleep 3
                     wait_for_elements_exist([@@asklabel], :timeout => 10)
             when "Best Comments" then 
                     sleep 3
-                    wait_for_elements_exist([@@bestcom], :timeout => 10)
+                    wait_for_elements_exist([@@com], :timeout => 10)
             when "New Comments" then
                     sleep 3
-                    wait_for_elements_exist([@@newcom], :timeout => 10)
+                    wait_for_elements_exist([@@com], :timeout => 10)
             when "Hacker News FAQ" then 
                     sleep 3
                     wait_for_elements_exist([@@faqlabel], :timeout => 10)
              when "news:yc homepage" then 
                     sleep 3
-                    wait_for_elements_exist([@@home], :timeout => 10)
+                    wait_for_elements_exist([@@newsychome], :timeout => 10)
              when "@news:yc Twitter" then 
                     sleep 3
-                    wait_for_elements_exist([@@tweet], :timeout => 10)
+                    wait_for_elements_exist([@@tweethome], :timeout => 10)
         end
+    end
+
+    def table_view
+        touch(@@tableviewer) 
+        sleep 3
+    end
+
+    def find_item
+        item = @@reply
+      if element_does_not_exist(item) then
+            wait_poll(:until_exists => item, :timeout => 40, :timeout_message => "Could not locate '#{item}'") do 
+                 #scroll("tableView index:0",:down)
+                 scroll_to_cell
+                 sleep 2
+             end
+        else
+          sleep 2
+          #touch(@@activelabel)
+          #touch(@@back)
+        end
+     end
+        # Do one more scroll after you locate the post so that entire post is visible
+       # scroll(@@feedtable,:down)
+ 
+    def story_time
+        touch(@@detailsheader)
+        sleep 5
+        puts @@detailstitle
+        sleep 5
+    end
+
+    def get_title
+      sleep 2
+       page_title = eval("query(title,:text)[0]")
+            wait_for(:timeout => 10,:timeout_message => "Title not found.  It says '#{page_title}'") do
+           page_title == "Notifications"
+        end
+  end
+
+    def faq_bar(choice)
+        sleep 2
+         case choice
+            when "R" then 
+                    touch(@@readability)
+                    sleep 5
+            when "Refresh" then 
+                    touch(@@refresh)
+                    sleep 3
+            when "Action" then
+                    touch(@@moreactions)
+                    sleep 3
+                    touch(@@noprogress)                 
+         end
     end
 
     def slide_over
@@ -178,15 +238,10 @@ class MorePage < Calabash::IBase
     	touch(@@submission)
     end
 
-    #def create_post
-    #    sleep 2
-    #    res = query(@@textview)
-    #		if res
-    #    		set_text(@@textview, @@text_value)
-  	#		end
-	#end
-    
-
+    def seemenu
+        wait_for_elements_exist([@@back], :timeout => 10)
+    end
+  
 	def create_post(action)
         sleep 2
         case action

@@ -83,6 +83,9 @@ end
 Given(/^I am on the (Hacker News|Best Submissions|Submission|Active Discussions|Active|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter) page$/) do |page|
  page(MorePage).page_handler(page)
 end
+Given(/^I touch the (R|Refresh|Action) button on the FAQ tab bar$/) do |choice|
+  page(MorePage).faq_bar(choice)
+end
 Given(/^I am on the Hacker News menu page$/) do
   page(MorePage).seemenu
 end
@@ -96,7 +99,10 @@ Given(/^I touch the story title to read the full article$/) do
   page(MorePage).story_time
 end
 Given(/^I return to the previous screen$/) do
-  page(MorePage).touch_goback
+  page(MorePage).backpage
+end  
+Given(/^I touch Flag on the subtabbar$/) do
+  page(MorePage).touch_subflag
 end  
 #############################
 ########                    #

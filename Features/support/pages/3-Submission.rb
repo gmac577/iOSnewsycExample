@@ -140,15 +140,6 @@ class SubmissionPage < Calabash::IBase
     	touch(@@submission)
     end
 
-    #def create_post
-    #    sleep 2
-    #    res = query(@@textview)
-    #		if res
-    #    		set_text(@@textview, @@text_value)
-  	#		end
-	#end
-    
-
 	def create_post(action)
         sleep 2
         case action
