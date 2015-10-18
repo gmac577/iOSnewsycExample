@@ -1,0 +1,1 @@
+default: --no-source --color --format pretty --tags ~@wip DEVICE_TARGET=D37DA57E-BD66-4043-AB8A-6F3790584267
