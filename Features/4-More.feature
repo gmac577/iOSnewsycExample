@@ -38,21 +38,21 @@ Scenario: Reading the best submissions by news:yc users
 
 @morenyc
   Scenario: Visiting the news:yc homepage
-  And I touch news:yc homepage
+  When I touch news:yc homepage
   And I am on the news:yc homepage page
   And I return to the previous screen
   Then I am on the Hacker News menu page
 
 @moretweet
   Scenario: Visiting the news:yc Twitter feed
-  And I touch @news:yc Twitter 
+  When I touch @news:yc Twitter 
   And I am on the @news:yc Twitter page
   And I return to the previous screen
   Then I am on the Hacker News menu page
 
 @morefaq
   Scenario: Reading the Hacker News FAQ and using the various tabbar options
-  And I touch Hacker News FAQ
+  When I touch Hacker News FAQ
   And I am on the Hacker News FAQ page
   And I use the options on the tabbar
   Then I am on the Hacker News menu page
