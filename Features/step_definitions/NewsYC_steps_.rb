@@ -104,6 +104,74 @@ end
 Given(/^I touch Flag on the subtabbar$/) do
   page(MorePage).touch_subflag
 end  
+Given(/^I have navigated successfully to the menu page$/) do
+  step "I am on the Main Feed screen"
+  step "I touch More on the tab bar"
+  step "I am on the Hacker News menu page"
+end
+Given(/^I read the Best Submissions$/) do
+  step "I touch Best Submissions"
+  step "I am on the Best Submissions page"
+  step "I touch the second post"
+  step "I am on the Submission page"
+  step "I return to the previous screen"
+  step "I return to the previous screen"
+end
+Given(/^I read all of the Active Discussions$/) do
+  step "I touch Active Discussions"
+  step "I am on the Active Discussions page"
+  step "I touch the second post"
+  step "I am on the Active page"
+  step "I touch the story title to read the full article"
+  step "I return to the previous screen"
+  step "I return to the previous screen"
+  step "I am on the Active Discussions page"
+  step "I return to the previous screen"
+end
+Given(/^I read all of the archived submissions$/) do
+  step "I touch Classic View"
+  step "I am on the Classic View page"
+  step "I touch the second post"
+  step "I am on the Submission page"
+  step "I touch the page"
+  step "I see the subtabbar"
+  step "I return to the previous screen"
+  step "I am on the Classic View page"
+  step "I return to the previous screen"
+end
+Given(/^I have logged in as a user$/) do
+  step "I touch Profile on the tab bar"
+  step 'I enter "valid" login credentials'
+end
+Given(/^I post a question$/) do
+  step "I touch Ask HN"
+  step "I am on the Ask HN page"
+  step "I touch the second post"
+  step "I successfully submit a post"
+  step "I am on the Submission page"
+  step "I return to the previous screen"
+  step "I am on the Ask HN page"
+  step "I return to the previous screen"
+end
+Given(/^I have flagged a comment$/) do
+  step "I touch Best Comments"
+  step "I am on the Best Comments page"
+  step "I touch the page"
+  step "I see the subtabbar"
+  step "I touch Flag on the subtabbar"
+  step "I am on the Best Comments page"
+  step "I return to the previous screen"
+  step "I am on the Hacker News menu page"
+  step "I touch New Comments"
+  step "I am on the New Comments page"
+  step "I return to the previous screen"
+end 
+Given(/^I use the options on the tabbar$/) do
+  step "I touch the Action button on the FAQ tab bar"
+  step "I touch the Refresh button on the FAQ tab bar"
+  step "I touch the R button on the FAQ tab bar"
+  step "I return to the previous screen"
+end
 #############################
 ########                    #
 ########  Search            #
