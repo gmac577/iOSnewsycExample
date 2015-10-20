@@ -22,25 +22,68 @@ class NavTabBarPage < Calabash::IBase
     @@submitter = "label {text LIKE '*Submitter*'}" 
 
 
+    #-----------------------------------------------
+#these two functions take the place of the sleep function
+#to inc/dec time, adjust the amount of microseconds when you call the "sleeper" function
+
+ def sleeper(clock)
+   n = 0
+   tm = clock
+   every(0.1) do
+     #puts Time.now.usec / 1000
+     n += 1
+     break if n == tm
+   end
+ end
+
+ def every(period)
+    base = last = Time.now.to_f
+    count = 0
+
+    loop do
+      now = Time.now.to_f
+      actual_secs = now - base
+      expected_secs = period * count
+      correction = expected_secs - actual_secs
+      correction = -period if correction < -period
+      select(nil, nil, nil, period + correction)
+      now = Time.now
+      last = now.to_f
+      count += 1
+      yield(now)
+    end
+  end
+#--------------------------------------------
+
     def select_storytab(index)
         case index
-            when "Reply" then touch(@@reply)
-            when "Upvote" then vote_handler
-            when "Flag" then touch(@@flag)
-            when "Downvote" then touch(@@downvote)
-            when "Action" then touch(@@action)
+            when "Reply" then
+               touch(@@reply)
+               sleeper(30)
+            when "Upvote" then
+               vote_handler
+               sleeper(30)
+            when "Flag" then
+               touch(@@flag)
+               sleeper(30)
+            when "Downvote" then
+               touch(@@downvote)
+               sleeper(30)
+            when "Action" then
+               touch(@@action)
+               sleeper(30)
         end
  end
 
  	def vote_handler
- 		sleep 3
+ 		sleeper(16)
  		touch(@@upvote)
  		if element_exists([@@progress]) then
- 			sleep 3
+ 			sleeper(16)
  			touch(@@progress)
  			touch(@@back)
  		else
- 			sleep 3
+ 			sleeper(16)
  			touch(@@back)
   		end
   	end
@@ -49,7 +92,7 @@ class NavTabBarPage < Calabash::IBase
   		case action
 			when "Flag" then 
   		  	  touch(@@doflag)
-  		  	  sleep 3
+  		  	  sleeper(16)
  			  touch(@@progress)
  			  touch(@@back)
   		    when "Cancel" then

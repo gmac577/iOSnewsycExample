@@ -12,11 +12,7 @@ Given(/^I am on the Login screen$/) do
   page(LoginPage).await
 end
 Given(/^I have logged in successfully$/) do 
-  step "I am on the Main Feed screen"
-  step "I touch Profile on the tab bar"
-  step "I am on the Login screen"
-  step 'I enter "valid" login credentials'
-  step "I am on the Main Feed screen"
+  page(LoginPage).login_master
 end
 Given(/^I enter "(.*?)" login credentials$/) do |type|
   page(LoginPage).await
@@ -58,19 +54,29 @@ end
 Given(/^I successfully submit an URL$/) do
   step "I touch Share on the header"
   step "I touch Submit URL"
-  step 'I enter "title" in the title text field'
+  step 'I create a text title'
+  step "I touch contents"
+  step 'I create a text post'
   step "I touch Cancel"
   step "I touch Discard"
 end
 Given(/^I successfully submit a Text$/) do
   step "I touch Share on the header"
   step "And I touch Submit Text"
-  step 'I enter "title" in the title text field'
-  step "I touch Post Body"
-  step 'And I enter "body_contents" in the post body field'
+  step 'I create a URL title'
+  step "I touch contents"
+  step 'I create a URL post'
   step "I touch Cancel"
   step "I touch Discard"
-  step "I touch the Home button"
+end
+Given(/^"I touch Share on the header"$/) do
+  page(FeedDetailsPage).touch_share
+end
+Given(/^I touch (Submit URL|Submit Text)$/) do |choice|
+  page(FeedDetailsPage).touch_choice(choice)
+end
+Given(/^I enter "title_text" in the title text field$/) do
+  page(FeedDetailsPage).enter_title
 end
 #############################
 ########                    #
@@ -225,7 +231,7 @@ end
 Given(/^I touch the Back arrow$/) do
   page(SubmissionPage).touch_back
 end
-Given(/^I create a (reply post|search query)$/) do |action|
+Given(/^I create a (reply post|search query|text title|URL title|text post|URL post)$/) do |action|
   page(SubmissionPage).create_post(action)
 end
 Given(/^I touch the (Submissions|Comments) header$/) do |choice|

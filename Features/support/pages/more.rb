@@ -27,7 +27,6 @@ class MorePage < Calabash::IBase
     @@tweet = "tableViewCell {text LIKE '*@newsyc_*'}"
     @@goback = "label {text LIKE '*Back*'}"
     @@com = "label {text LIKE 'Comments'}"
-    #@@goback = "button index:0"
     @@bestsublabel = "label {text LIKE '*Best Submissions*'}"
     @@subtitle = "label {text LIKE '*Submission*'}"
     @@activelabel = "label {text LIKE '*Active*'}"
@@ -52,28 +51,61 @@ class MorePage < Calabash::IBase
     @@progress = "label {text LIKE '*Continue*'}"
     @@noprogress = "label {text LIKE '*Cancel*'}"
   
+
+#-----------------------------------------------
+#these two functions take the place of the sleep function
+#to inc/dec time, adjust the amount of microseconds when you call the "sleeper" function
+
+ def sleeper(clock)
+   n = 0
+   tm = clock
+   every(0.1) do
+     n += 1
+     break if n == tm
+   end
+ end
+
+ def every(period)
+    base = last = Time.now.to_f
+    count = 0
+
+    loop do
+      now = Time.now.to_f
+      actual_secs = now - base
+      expected_secs = period * count
+      correction = expected_secs - actual_secs
+      correction = -period if correction < -period
+      select(nil, nil, nil, period + correction)
+      now = Time.now
+      last = now.to_f
+      count += 1
+      yield(now)
+    end
+  end
+#--------------------------------------------
+
     def pause
-      	sleep 5
+      	sleeper(25)
     end
 	
     def touch_subflag
         wait_for_elements_exist([@@subflag], :timeout => 10)
          #puts "here we go"
           touch(@@subflag)
-        sleep 5
+        sleeper(12)
         touch(@@doflag)
-        sleep 3
+        sleep(20)
         touch(@@progress)   
 	end
 
     def touch_goback
-	  sleep 5
+	  sleeper(20)
       touch(@@goback)
     end
 
     def backpage
       touch(nil, :offset => {:x => 8, :y => 26})
-      sleep 5
+      sleeper(20)
     end
 
     def touch_discard
@@ -85,7 +117,7 @@ class MorePage < Calabash::IBase
 	end
 
 	def verify_page_elements
-		sleep 4
+		sleep(20)
         if
           wait_for_elements_exist([@@karma], :timeout => 10)
           wait_for_elements_exist([@@average], :timeout => 10)
@@ -99,40 +131,38 @@ class MorePage < Calabash::IBase
      def select_more_actions(choice)
         case choice
             when "Hacker News" then 
-                    sleep 3
+                    sleeper(25)
                     touch([@@back])
             when "Best Submissions" then 
-            		sleep 3
+            		sleeper(25)
             		touch([@@bestsub])
             when "Active Discussions" then 
-            		sleep 3
+            		sleeper(25)
             		touch([@@active])
             when "Classic View" then
-            	    sleep 3
+            	    sleeper(25)
             		touch([@@classic])
             when "Ask HN" then 
-            		sleep 3
+            		sleeper(25)
             		touch([@@askhn])
             when "Best Comments" then 
-            		sleep 3
+            		sleeper(25)
             		touch([@@bestcom])
             when "New Comments" then
-            	    sleep 3
+            	    sleeper(25)
             		touch([@@newcom])
             when "Hacker News FAQ" then 
                     scroll_to_row "tableView", 4
-                    sleep 5
-                    sleep 3
+                    sleeper(25)
             		touch([@@faq])
              when "news:yc homepage" then 
                     scroll_to_row "tableView", 4
-             		sleep 5
+             		sleeper(25)
             		touch([@@home])
-                    sleep 5
+                    sleep(15)
              when "@news:yc Twitter" then 
                     scroll_to_row "tableView", 4
-                    sleep 5
-                    sleep 3
+                    sleeper(25)
                     touch([@@tweet])
         end
     end
@@ -140,38 +170,38 @@ class MorePage < Calabash::IBase
         def page_handler(page)
         case page
             when "Hacker News" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@back], :timeout => 10)
             when "Best Submissions" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@bestsublabel], :timeout => 10)
             when "Submission" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@subtitle], :timeout => 10)
                     #touch_goback
             when "Active Discussions" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@activelabel], :timeout => 10)
             when "Classic View" then
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@classiclabel], :timeout => 10)
             when "Ask HN" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@asklabel], :timeout => 10)
             when "Best Comments" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@com], :timeout => 10)
             when "New Comments" then
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@com], :timeout => 10)
             when "Hacker News FAQ" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@faqlabel], :timeout => 10)
              when "news:yc homepage" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@newsychome], :timeout => 10)
              when "@news:yc Twitter" then 
-                    sleep 3
+                    sleeper(16)
                     wait_for_elements_exist([@@tweethome], :timeout => 10)
         end
     end
@@ -187,10 +217,10 @@ class MorePage < Calabash::IBase
             wait_poll(:until_exists => item, :timeout => 40, :timeout_message => "Could not locate '#{item}'") do 
                  #scroll("tableView index:0",:down)
                  scroll_to_cell
-                 sleep 2
+                 sleeper(16)
              end
         else
-          sleep 2
+          sleeper(16)
           #touch(@@activelabel)
           #touch(@@back)
         end
@@ -200,13 +230,13 @@ class MorePage < Calabash::IBase
  
     def story_time
         touch(@@detailsheader)
-        sleep 5
+        sleeper(25)
         puts @@detailstitle
-        sleep 5
+        sleeper(25)
     end
 
     def get_title
-      sleep 2
+      sleeper(16)
        page_title = eval("query(title,:text)[0]")
             wait_for(:timeout => 10,:timeout_message => "Title not found.  It says '#{page_title}'") do
            page_title == "Notifications"
@@ -214,17 +244,17 @@ class MorePage < Calabash::IBase
   end
 
     def faq_bar(choice)
-        sleep 2
+        sleeper(16)
          case choice
             when "R" then 
                     touch(@@readability)
-                    sleep 5
+                    sleeper(25)
             when "Refresh" then 
                     touch(@@refresh)
-                    sleep 3
+                    sleeper(25)
             when "Action" then
                     touch(@@moreactions)
-                    sleep 3
+                    sleeper(25)
                     touch(@@noprogress)                 
          end
     end
@@ -234,7 +264,7 @@ class MorePage < Calabash::IBase
     end
 
     def touch_sub
-    	sleep 4
+    	sleeper(20)
     	touch(@@submission)
     end
 
@@ -243,15 +273,15 @@ class MorePage < Calabash::IBase
     end
   
 	def create_post(action)
-        sleep 2
+        sleeper(20)
         case action
             when "reply post" then 
             		set_text(@@textview, @@text_value)
             when "search query" then 
             		touch(@@getsearch)
-            		sleep 3
+            		sleeper(16)
             		set_text("fieldEditor index:0", @@searchtext)
-            		sleep 5
+            		sleeper(25)
             		keyboard_enter_char "Return"
          end
     end

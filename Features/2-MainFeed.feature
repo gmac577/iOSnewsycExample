@@ -8,7 +8,6 @@ Background:
   Given I am on the Main Feed screen
 
 #NOTE: User must have a valid account at HackerNews.com/submit
-#NOTE: These small scenarios could be combined into one long one but are not for demonstration
 
 @readmain
 Scenario:  Read stories on the Main feed 
@@ -38,11 +37,19 @@ Scenario: Search
   And I touch Home on the tab bar
   Then I am on the Main Feed screen
 
+@wip
+@textmain
+Scenario: Submitting a text
+  When I successfully submit a Text
+  And I touch Home on the tab bar
+  Then I am on the Main Feed screen
 
-
-
-
-
+@wip
+@texturl
+Scenario: Submitting a url
+  When I successfully submit an URL
+  And I touch Home on the tab bar
+  Then I am on the Main Feed screen
 
 
 
