@@ -5,12 +5,9 @@ Feature: Login
   So I can begin adding comments and managing my account
 
 Background:
-  Given I am on the Main Feed screen
-  When I touch Profile on the tab bar
-  And I am on the Login screen
+  Given I navigate to the login screen
 
 #NOTE: User must have a valid account at HackerNews.com/submit
-#NOTE: These small scenarios could be combined into one long one but are not for demonstration
 
 @wrongname
 Scenario: Unsuccessful wrong name Login

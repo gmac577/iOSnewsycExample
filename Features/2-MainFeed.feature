@@ -37,18 +37,14 @@ Scenario: Search
   And I touch Home on the tab bar
   Then I am on the Main Feed screen
 
-@wip
 @textmain
 Scenario: Submitting a text
   When I successfully submit a Text
-  And I touch Home on the tab bar
   Then I am on the Main Feed screen
 
-@wip
 @texturl
 Scenario: Submitting a url
   When I successfully submit an URL
-  And I touch Home on the tab bar
   Then I am on the Main Feed screen
 
 

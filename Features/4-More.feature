@@ -9,7 +9,7 @@ Background:
 
 @morebest
 Scenario: Reading the best submissions by news:yc users
-  When I read the Best Submissions
+  When I read all of the Best Submissions
   Then I am on the Hacker News menu page
 
 @moreactive

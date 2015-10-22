@@ -1,6 +1,7 @@
 require 'calabash-cucumber/ibase'
 
 class NavTabBarPage < Calabash::IBase
+    include PagePopulator  
  
     @@tabbar = "toolbarNavigationButton"
 
@@ -22,40 +23,8 @@ class NavTabBarPage < Calabash::IBase
     @@submitter = "label {text LIKE '*Submitter*'}" 
 
 
-    #-----------------------------------------------
-#these two functions take the place of the sleep function
-#to inc/dec time, adjust the amount of microseconds when you call the "sleeper" function
-
- def sleeper(clock)
-   n = 0
-   tm = clock
-   every(0.1) do
-     #puts Time.now.usec / 1000
-     n += 1
-     break if n == tm
-   end
- end
-
- def every(period)
-    base = last = Time.now.to_f
-    count = 0
-
-    loop do
-      now = Time.now.to_f
-      actual_secs = now - base
-      expected_secs = period * count
-      correction = expected_secs - actual_secs
-      correction = -period if correction < -period
-      select(nil, nil, nil, period + correction)
-      now = Time.now
-      last = now.to_f
-      count += 1
-      yield(now)
-    end
-  end
-#--------------------------------------------
-
-    def select_storytab(index)
+#----------------------------------------------
+  def select_storytab(index)
         case index
             when "Reply" then
                touch(@@reply)
@@ -74,6 +43,7 @@ class NavTabBarPage < Calabash::IBase
                sleeper(30)
         end
  end
+#----------------------------------------------
 
  	def vote_handler
  		sleeper(16)
@@ -81,34 +51,36 @@ class NavTabBarPage < Calabash::IBase
  		if element_exists([@@progress]) then
  			sleeper(16)
  			touch(@@progress)
- 			touch(@@back)
+ 			page(MorePage).backpage
  		else
  			sleeper(16)
- 			touch(@@back)
+ 			page(MorePage).backpage
   		end
   	end
+#----------------------------------------------
 
   	def flag_handler(action)
   		case action
 			when "Flag" then 
   		  	  touch(@@doflag)
   		  	  sleeper(16)
- 			  touch(@@progress)
- 			  touch(@@back)
-  		    when "Cancel" then
-  		  	 touch(@@noprogress)
-  		  	 touch(@@back)
-         	end
+ 			      touch(@@progress)
+ 			      page(MorePage).backpage
+  		when "Cancel" then
+          if element_exists([@@noprogress]) then
+              sleeper(16)
+  		  	   touch(@@noprogress)
+             page(MorePage).backpage
+          else
+            page(MorePage).backpage
+          end
+      end
 	end
+#----------------------------------------------
 
 	def sub_handler
 			touch(@@submitter)
-  	end
-
-	
-
-
-
-
+  end
+#----------------------------------------------
 
 end

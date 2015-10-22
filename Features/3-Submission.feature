@@ -9,7 +9,6 @@ Feature: Submission
   When I navigate to the Submission screen
 
 #NOTE: User must have a valid account at HackerNews.com/submit
-#NOTE: These small scenarios could be combined into one long one but are not for demonstration
 #NOTE: These scenarios require the user to NOT be signed into their account
 #NOTE: 'Downvote' is greyed out at the moment
 

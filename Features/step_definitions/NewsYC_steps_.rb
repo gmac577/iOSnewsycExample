@@ -8,11 +8,15 @@ require 'calabash-cucumber/calabash_steps'
 ########  Login/Profile     #
 ########                    #
 #############################
+
+Given(/^I navigate to the login screen$/) do
+  page(LoginPage).login_navigate
+end
 Given(/^I am on the Login screen$/) do
   page(LoginPage).await
 end
 Given(/^I have logged in successfully$/) do 
-  page(LoginPage).login_master
+  page(LoginPage).login_success
 end
 Given(/^I enter "(.*?)" login credentials$/) do |type|
   page(LoginPage).await
@@ -46,33 +50,15 @@ Given(/^I touch Recent on the header$/) do
   page(FeedDetailsPage).touch_rec
 end
 Given(/^I create a successful search$/) do
-  step "I create a search query"
-  step 'I verify I see "Microsoft" in the story text'
-  step "I touch Recent on the header"
-  step 'I verify I see "Microsoft" in the story text'
+  page(FeedDetailsPage).search_success
 end
-Given(/^I successfully submit an URL$/) do
-  step "I touch Share on the header"
-  step "I touch Submit URL"
-  step 'I create a text title'
-  step "I touch contents"
-  step 'I create a text post'
-  step "I touch Cancel"
-  step "I touch Discard"
+Given(/^I successfully submit (an URL|a Text)$/) do |post|
+  page(FeedDetailsPage).post_success(post)
 end
-Given(/^I successfully submit a Text$/) do
-  step "I touch Share on the header"
-  step "And I touch Submit Text"
-  step 'I create a URL title'
-  step "I touch contents"
-  step 'I create a URL post'
-  step "I touch Cancel"
-  step "I touch Discard"
-end
-Given(/^"I touch Share on the header"$/) do
+Given(/^I touch Share on the header$/) do
   page(FeedDetailsPage).touch_share
 end
-Given(/^I touch (Submit URL|Submit Text)$/) do |choice|
+Given(/^I touch (Submit URL|Submit Text|Contents)$/) do |choice|
   page(FeedDetailsPage).touch_choice(choice)
 end
 Given(/^I enter "title_text" in the title text field$/) do
@@ -111,89 +97,22 @@ Given(/^I touch Flag on the subtabbar$/) do
   page(MorePage).touch_subflag
 end  
 Given(/^I have navigated successfully to the menu page$/) do
-  step "I am on the Main Feed screen"
-  step "I touch More on the tab bar"
-  step "I am on the Hacker News menu page"
+  page(MorePage).more_navigate
 end
-Given(/^I read the Best Submissions$/) do
-  step "I touch Best Submissions"
-  step "I am on the Best Submissions page"
-  step "I touch the second post"
-  step "I am on the Submission page"
-  step "I return to the previous screen"
-  step "I return to the previous screen"
-end
-Given(/^I read all of the Active Discussions$/) do
-  step "I touch Active Discussions"
-  step "I am on the Active Discussions page"
-  step "I touch the second post"
-  step "I am on the Active page"
-  step "I touch the story title to read the full article"
-  step "I return to the previous screen"
-  step "I return to the previous screen"
-  step "I am on the Active Discussions page"
-  step "I return to the previous screen"
-end
-Given(/^I read all of the archived submissions$/) do
-  step "I touch Classic View"
-  step "I am on the Classic View page"
-  step "I touch the second post"
-  step "I am on the Submission page"
-  step "I touch the page"
-  step "I see the subtabbar"
-  step "I return to the previous screen"
-  step "I am on the Classic View page"
-  step "I return to the previous screen"
+Given(/^I read all of the (Best Submissions|Active Discussions|archived submissions)$/) do |novel|
+  page(MorePage).read_success(novel)
 end
 Given(/^I have logged in as a user$/) do
-  step "I touch Profile on the tab bar"
-  step 'I enter "valid" login credentials'
+  page(MorePage).more_login
 end
 Given(/^I post a question$/) do
-  step "I touch Ask HN"
-  step "I am on the Ask HN page"
-  step "I touch the second post"
-  step "I successfully submit a post"
-  step "I am on the Submission page"
-  step "I return to the previous screen"
-  step "I am on the Ask HN page"
-  step "I return to the previous screen"
+  page(MorePage).ask_post
 end
 Given(/^I have flagged a comment$/) do
-  step "I touch Best Comments"
-  step "I am on the Best Comments page"
-  step "I touch the page"
-  step "I see the subtabbar"
-  step "I touch Flag on the subtabbar"
-  step "I am on the Best Comments page"
-  step "I return to the previous screen"
-  step "I am on the Hacker News menu page"
-  step "I touch New Comments"
-  step "I am on the New Comments page"
-  step "I return to the previous screen"
+  page(MorePage).flag_comment
 end 
 Given(/^I use the options on the tabbar$/) do
-  step "I touch the Action button on the FAQ tab bar"
-  step "I touch the Refresh button on the FAQ tab bar"
-  step "I touch the R button on the FAQ tab bar"
-  step "I return to the previous screen"
-end
-#############################
-########                    #
-########  Search            #
-########                    #
-#############################
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
-end
-Given(/^I can bla the bla bla bla-bla-bla$/) do 
-  page(BlaOnePage).bla_bla_bla(bla)
+  page(MorePage).tab_options
 end
 
 #############################
@@ -250,90 +169,18 @@ Given(/^I touch the (Mail|Reminders|More|More2|Add|Copy|Read|Open) button$/) do 
   page(SubmissionPage).select_share_action(choice)
 end
 Given(/^I navigate to the Submission screen$/) do
-  step "I touch the second post"
-  step "I am on the Submission screen"
+  page(SubmissionPage).sub_navigate
 end
 Given(/^I successfully submit a post$/) do
-  step "I touch Reply on the tab bar"
-  step "I create a reply post"
-  step "I touch Cancel"
-  step "I touch the Discard button"
+  page(SubmissionPage).sub_post
 end
 Given(/^I succesfully flag a story$/) do
-  step "I touch Flag on the tab bar"
-  step "I touch Cancel on the menu"
-  step "I am on the Main Feed screen"
-  step "I touch the second post"
-  step "I am on the Submission screen"
-  step "I touch Flag on the tab bar"
-  step "I touch Flag on the menu"
+  page(SubmissionPage).sub_flag
 end
 Given(/^I navigte to a user's profile$/) do
-  step "I touch Action on the tab bar"
-  step "I touch Cancel on the menu"
-  step "I am on the Main Feed screen"
-  step "I touch the second post"
-  step "I am on the Submission screen"
-  step "I touch Action on the tab bar"
-  step "I touch Submitter on the menu"
-  step "I see the totals for karma and average"
-  step "I touch the Submissions header"
-  step "I touch the Comments header"
-end
-Given(/^I successfully send an email$/) do
-  step "I touch the Share button"
-  step "I touch the Mail button"
-  step 'I enter "email" in the "To" field'
-  step 'I enter "subject" in the "Subject" field'
-  step 'I enter "mail_reply_text" in the "Body" field'
-  step "I touch the Send button"
+ page(SubmissionPage).sub_view
 end
 
-Given(/^And I successfully send a reminder%/) do
-  step "I touch the Share button"
-  step "I touch the Reminders button"
-  step 'I enter "reminder_text" in the "Body" field'
-  step "I touch Options"
-  step 'I touch the "Remind me on a day" button'
-  step "I touch Alarm"
-  step "I touch the Date column"
-  step 'I touch "Thu Dec 31'
-  step "I touch the Hour column"
-  step 'I touch "11"'
-  step "I touch the Minute column"
-  step 'I touch "59"'
-  step "I touch the Meridian column"
-  step 'I touch "PM"'
-  step "I touch Repeat"
-  step 'I touch "Every Year'
-  step 'I touch "Options'
-  step "I touch Priority"
-  step 'I touch "!!"'
-  step "I touch Notes"
-  step 'I enter "notes_text" in the "Notes" field'
-  step "I touch Reminder in the header"
-  step "I touch Add"
-end
-Given(/^I test the rest of the Share Sheet options%/) do
-  step "I touch the Share button"
-  step "I touch the More button"
-  step "I touch Done"
-  step "I touch the Share button"
-  step "I touch the Add button"
-  step "I touch the Share button"
-  step "I touch Copy"
-  step "I touch the Share button"
-  step "I touch the Read button"
-  step "I touch Cancel"
-  step "I touch the Share button"
-  step "I touch Open"
-  step 'I see the article from "news.ycombinator.com" in Safari'
-  step 'I touch the "Back to news:yc" button in the header'
-  step 'I touch the Share button'
-  step 'I touch the More2 button'
-  step 'I touch Done'
-  step 'I touch Cancel'
-end
 
 
 

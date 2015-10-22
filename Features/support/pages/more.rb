@@ -52,71 +52,140 @@ class MorePage < Calabash::IBase
     @@noprogress = "label {text LIKE '*Cancel*'}"
   
 
+
+#######################################
+####    Master Methods start here     #
+####                                  #
+####                                  #
+####                                  #
+#######################################
 #-----------------------------------------------
-#these two functions take the place of the sleep function
-#to inc/dec time, adjust the amount of microseconds when you call the "sleeper" function
-
- def sleeper(clock)
-   n = 0
-   tm = clock
-   every(0.1) do
-     n += 1
-     break if n == tm
-   end
- end
-
- def every(period)
-    base = last = Time.now.to_f
-    count = 0
-
-    loop do
-      now = Time.now.to_f
-      actual_secs = now - base
-      expected_secs = period * count
-      correction = expected_secs - actual_secs
-      correction = -period if correction < -period
-      select(nil, nil, nil, period + correction)
-      now = Time.now
-      last = now.to_f
-      count += 1
-      yield(now)
+#login method
+    def more_login
+        page(FooterTabBarPage).select_tab("Profile")
+        page(LoginPage).await
+        page(LoginPage).login("valid")
     end
-  end
-#--------------------------------------------
+#-----------------------------------------------
+#this is the method script for navigating to more screen
 
+def more_navigate
+    page(FeedDetailsPage).await
+    page(FooterTabBarPage).select_tab("More")
+    page(MorePage).seemenu
+end
+#-----------------------------------------------
+#this is the method script for reading the best subs
+
+def read_success(novel)
+    case novel
+        when "Best Submissions" then
+            page(MorePage).select_more_actions("Best Submissions")
+            page(MorePage).page_handler("Best Submissions")
+            page(FeedDetailsPage).touch_row
+            page(MorePage).page_handler("Submission")
+            page(MorePage).backpage
+            page(MorePage).backpage
+        when "Active Discussions" then
+            page(MorePage).select_more_actions("Active Discussions")
+            page(MorePage).page_handler("Active Discussions")
+            page(FeedDetailsPage).touch_row
+            page(MorePage).page_handler("Active")
+            page(MorePage).story_time
+            page(MorePage).backpage
+            page(MorePage).backpage
+            page(MorePage).page_handler("Active Discussions")
+            page(MorePage).backpage
+        when "archived submissions" then
+            page(MorePage).select_more_actions("Classic View")
+            page(MorePage).page_handler("Classic View")
+            page(FeedDetailsPage).touch_row
+            page(MorePage).page_handler("Submission")
+            page(MorePage).table_view
+            page(MorePage).find_item
+            page(MorePage).backpage
+            page(MorePage).page_handler("Classic View")
+            page(MorePage).backpage
+        end
+end
+#-----------------------------------------------
+#this is the method script for posting a question 
+    
+    def ask_post
+        page(MorePage).select_more_actions("Ask HN")
+        page(MorePage).page_handler("Ask HN")
+        page(FeedDetailsPage).touch_row
+        page(NavTabBarPage).select_storytab("Reply")
+        page(SubmissionPage).create_post("reply post")
+        page(NavTabBarPage).flag_handler("Cancel")
+        page(SubmissionPage).touch_discard
+        page(SubmissionPage).await
+        page(MorePage).backpage
+        page(MorePage).page_handler("Ask HN")
+        page(MorePage).backpage
+    end  
+#-----------------------------------------------
+#this is the method script for flagging a comment
+    def flag_comment
+        page(MorePage).select_more_actions("Best Comments")
+        page(MorePage).page_handler("Best Comments")
+        page(MorePage).table_view
+        page(MorePage).find_item
+        page(MorePage).touch_subflag
+        page(MorePage).page_handler("Best Comments")
+        page(MorePage).backpage
+        page(MorePage).seemenu
+        page(MorePage).select_more_actions("New Comments")
+        page(MorePage).page_handler("New Comments")
+        page(MorePage).backpage
+    end 
+#-----------------------------------------------
+#this is the method script for second toolbar options
+    def tab_options
+        page(MorePage).faq_bar("Action")
+        page(MorePage).faq_bar("Refresh")
+        page(MorePage).faq_bar("R")
+        page(MorePage).backpage
+    end
+#######################################
+####    Helper Methods start here     #
+####                                  #
+####                                  #
+####                                  #
+#######################################
+#--------------------------------------------
     def pause
       	sleeper(25)
     end
-	
-    def touch_subflag
+#----------------------------------------------
+	def touch_subflag
         wait_for_elements_exist([@@subflag], :timeout => 10)
-         #puts "here we go"
-          touch(@@subflag)
+        touch(@@subflag)
         sleeper(12)
         touch(@@doflag)
-        sleep(20)
+        sleeper(20)
         touch(@@progress)   
 	end
-
+#----------------------------------------------
     def touch_goback
 	  sleeper(20)
       touch(@@goback)
     end
-
+#----------------------------------------------
     def backpage
       touch(nil, :offset => {:x => 8, :y => 26})
       sleeper(20)
     end
-
+#----------------------------------------------
     def touch_discard
       touch(@@discard)
     end
-
+#----------------------------------------------
     def search_value
 		enter_text(@@textview,@@search_value)
 	end
-
-	def verify_page_elements
+#----------------------------------------------
+    def verify_page_elements
 		sleep(20)
         if
           wait_for_elements_exist([@@karma], :timeout => 10)
@@ -127,8 +196,8 @@ class MorePage < Calabash::IBase
           touch(@@submission)
         end
     end
-
-     def select_more_actions(choice)
+#----------------------------------------------
+    def select_more_actions(choice)
         case choice
             when "Hacker News" then 
                     sleeper(25)
@@ -166,8 +235,8 @@ class MorePage < Calabash::IBase
                     touch([@@tweet])
         end
     end
-
-        def page_handler(page)
+#----------------------------------------------
+    def page_handler(page)
         case page
             when "Hacker News" then 
                     sleeper(16)
@@ -205,12 +274,12 @@ class MorePage < Calabash::IBase
                     wait_for_elements_exist([@@tweethome], :timeout => 10)
         end
     end
-
+#----------------------------------------------
     def table_view
         touch(@@tableviewer) 
         sleep 3
     end
-
+#----------------------------------------------
     def find_item
         item = @@reply
       if element_does_not_exist(item) then
@@ -227,14 +296,12 @@ class MorePage < Calabash::IBase
      end
         # Do one more scroll after you locate the post so that entire post is visible
        # scroll(@@feedtable,:down)
- 
+ #----------------------------------------------
     def story_time
         touch(@@detailsheader)
-        sleeper(25)
-        puts @@detailstitle
-        sleeper(25)
+        sleeper(30)
     end
-
+#----------------------------------------------
     def get_title
       sleeper(16)
        page_title = eval("query(title,:text)[0]")
@@ -242,7 +309,7 @@ class MorePage < Calabash::IBase
            page_title == "Notifications"
         end
   end
-
+#----------------------------------------------
     def faq_bar(choice)
         sleeper(16)
          case choice
@@ -258,21 +325,21 @@ class MorePage < Calabash::IBase
                     touch(@@noprogress)                 
          end
     end
-
+#----------------------------------------------
     def slide_over
     	swipe "left", {:query => "collectionView"}
     end
-
+#----------------------------------------------
     def touch_sub
     	sleeper(20)
     	touch(@@submission)
     end
-
+#----------------------------------------------
     def seemenu
         wait_for_elements_exist([@@back], :timeout => 10)
     end
-  
-	def create_post(action)
+ #----------------------------------------------
+    def create_post(action)
         sleeper(20)
         case action
             when "reply post" then 
@@ -285,6 +352,7 @@ class MorePage < Calabash::IBase
             		keyboard_enter_char "Return"
          end
     end
+#----------------------------------------------
 
 end
 

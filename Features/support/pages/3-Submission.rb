@@ -1,5 +1,6 @@
 require 'calabash-cucumber/ibase'
 
+
 class SubmissionPage < Calabash::IBase
 
     include FormHelper
@@ -29,7 +30,7 @@ class SubmissionPage < Calabash::IBase
     @@comments = "tableViewCell {text LIKE '*Comments*'}"
     @@prof = "label {text LIKE '*Profile*'}"
     @@share = "label {text LIKE '*Share*'}"
-	  @@mail = "label {text LIKE '*Mail*'}"
+	@@mail = "label {text LIKE '*Mail*'}"
     @@reminder = "label {text LIKE '*Reminders*'}"
     @@more = "label {text LIKE '*More*'} index:0"
     @@moremore = "label {text LIKE '*More*'} index:1"
@@ -46,56 +47,84 @@ class SubmissionPage < Calabash::IBase
     @@alltitle = "This is the title of the text"
     @@textbody = "This is text that will go in the body of the submit text form. Carpe Diem!"
     @@urlbody = "http://www.riis.com"
-    
-#-----------------------------------------------
-#these two functions take the place of the sleep function
-#to inc/dec time, adjust the amount of microseconds when you call the "sleeper" function
+    @@title = "textField index:0"
+    @@url = "PlaceholderTextView index:0"
+    @@bodytext = "PlaceholderTextView index:0"
+    @@discard = "label {text LIKE '*Discard*'}"
 
- def sleeper(clock)
-   n = 0
-   tm = clock
-   every(0.1) do
-     n += 1
-     break if n == tm
-   end
- end
 
- def every(period)
-    base = last = Time.now.to_f
-    count = 0
-
-    loop do
-      now = Time.now.to_f
-      actual_secs = now - base
-      expected_secs = period * count
-      correction = expected_secs - actual_secs
-      correction = -period if correction < -period
-      select(nil, nil, nil, period + correction)
-      now = Time.now
-      last = now.to_f
-      count += 1
-      yield(now)
-    end
-  end
+#######################################
+####     Master Methods start here    #
+####                                  #
+####                                  #
+####                                  #
+#######################################
 #--------------------------------------------
+#navigating to the submission screen
+    def sub_navigate
+        page(FeedDetailsPage).touch_row
+        page(MorePage).page_handler("Submission")
+    end
+#--------------------------------------------
+#posting a reply method
+    def sub_post
+        page(NavTabBarPage).select_storytab("Reply")
+        page(SubmissionPage).create_post("reply post")
+        page(NavTabBarPage).flag_handler("Cancel")
+        page(SubmissionPage).touch_discard
+    end
+#--------------------------------------------
+#flagging a story method
+    def sub_flag
+        page(MorePage).touch_subflag
+        page(NavTabBarPage).flag_handler("Cancel")
+        page(MorePage).page_handler("Main Feed")
+        page(FeedDetailsPage).touch_row
+        page(MorePage).page_handler("Submission")
+        page(MorePage).touch_subflag
+        page(NavTabBarPage).flag_handler("Flag")
+    end
+#--------------------------------------------
+#viewing a users profile method
+    def sub_view
+        page(NavTabBarPage).select_storytab("Action")
+        page(NavTabBarPage).flag_handler("Cancel")
+        page(MorePage).page_handler("Main Feed")
+        page(FeedDetailsPage).touch_row
+        page(MorePage).page_handler("Submission")
+        page(NavTabBarPage).select_storytab("Action")
+        page(NavTabBarPage).sub_handler
+        page(SubmissionPage).verify_page_elements
+        page(SubmissionPage).select_action("Submissions")
+        page(SubmissionPage).select_action("Comments")
+    end
+#######################################
+####    Helper Methods start here     #
+####                                  #
+####                                  #
+####                                  #
+#######################################
 
-    def pause
+
+#-----------------------------------------------
+     def pause
       	sleeper(25)
     end
-	
+#----------------------------------------------
 	def touch_back
-	  sleep 5
+	  sleeper(16)
       touch(@@back)
     end
-
+#----------------------------------------------
     def touch_discard
+      sleeper(16)
       touch(@@discard)
     end
-
+#----------------------------------------------
     def search_value
 		enter_text(@@textview,@@search_value)
 	end
-
+#----------------------------------------------
 	def verify_page_elements
 		sleep 4
         if
@@ -107,13 +136,12 @@ class SubmissionPage < Calabash::IBase
           touch(@@submission)
         end
     end
-
+#----------------------------------------------
      def select_action(choice)
         case choice
             when "Submissions" then 
             		touch(@@submissions)
-                    puts @@submissions
-            		sleeper(20)
+                    sleeper(20)
             		touch(@@prof)
             when "Comments" then
             	    touch(@@comments)
@@ -121,7 +149,7 @@ class SubmissionPage < Calabash::IBase
             		touch(@@prof)
         end
     end
-
+#----------------------------------------------
      def select_share_action(choice)
         case choice
             when "Mail" then 
@@ -161,18 +189,16 @@ class SubmissionPage < Calabash::IBase
             		touch(@@prof)
         end
     end
-
-    def
-
-    def slide_over
+#----------------------------------------------
+   def slide_over
     	swipe "left", {:query => "collectionView"}
-    end
-
+   end
+#----------------------------------------------
     def touch_sub
     	sleeper(16)
     	touch(@@submission)
     end
-
+#----------------------------------------------
 	def create_post(action)
         sleeper(16)
         case action
@@ -202,6 +228,6 @@ class SubmissionPage < Calabash::IBase
                 keyboard_enter_char "Return"
          end
     end
-
+#----------------------------------------------
 end
 

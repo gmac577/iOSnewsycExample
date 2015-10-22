@@ -1,6 +1,7 @@
 require 'calabash-cucumber/ibase'
 
 class FooterTabBarPage < Calabash::IBase
+    include PagePopulator   
  
     @@tabbar = "tabBarButton"
 
@@ -15,7 +16,9 @@ class FooterTabBarPage < Calabash::IBase
     @@searchimg = "tabBarSwappableImageView index:3"
     @@moreimg = "tabBarSwappableImageView index:4"
 
+#--------------------------------------------
     def select_tab(index)
+        sleeper(16)
         case index
             when "Home" then index = 0
             when "New" then index = 1
@@ -23,8 +26,9 @@ class FooterTabBarPage < Calabash::IBase
             when "Search" then index = 3
             when "More" then index = 4
         end
-        sleep 4
+        sleeper(10)
         wait_for_elements_exist([@@tabbar], :timeout => 10)
     	touch(@@tabbar + " index: #{index}")
     end
+#----------------------------------------------
  end

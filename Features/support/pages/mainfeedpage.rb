@@ -1,4 +1,7 @@
 require 'calabash-cucumber/ibase'
+require_relative 'mainfeedpage.rb'
+require_relative 'footertabbar.rb'
+require_relative '3-Submission.rb'
 
 class FeedDetailsPage < Calabash::IBase
 
@@ -12,7 +15,7 @@ class FeedDetailsPage < Calabash::IBase
   def await(opts={})
 		wait_for_elements_exist([title], :timeout => 10)
         self
-    end
+  end
 
     @@feedtable = "tableViewCell'"
     @@storycell = "SubmissionTableCell"
@@ -32,66 +35,97 @@ class FeedDetailsPage < Calabash::IBase
     @@bodytext = "PlaceholderTextView index:0"
     @@discard = "label {text LIKE '*Discard*'}"
 
+#######################################
+####    Master Methods start here     #
+####                                  #
+####                                  #
+####                                  #
+#######################################
 
 #-----------------------------------------------
-#these two functions take the place of the sleep function
-#to inc/dec time, adjust the amount of microseconds when you call the "sleeper" function
+#this is the method script for a succesful search
 
- def sleeper(clock)
-   n = 0
-   tm = clock
-   every(0.1) do
-     n += 1
-     break if n == tm
-   end
- end
+def search_success
+  page(SubmissionPage).create_post("search query")
+  page(FeedDetailsPage).view_search("Microsoft")
+  page(FeedDetailsPage).touch_rec
+  page(FeedDetailsPage).view_search("Microsoft")
+end
+#-----------------------------------------------
+#this is the method script for successful URL submit
 
- def every(period)
-    base = last = Time.now.to_f
-    count = 0
-
-    loop do
-      now = Time.now.to_f
-      actual_secs = now - base
-      expected_secs = period * count
-      correction = expected_secs - actual_secs
-      correction = -period if correction < -period
-      select(nil, nil, nil, period + correction)
-      now = Time.now
-      last = now.to_f
-      count += 1
-      yield(now)
-    end
+def post_success(post)
+      page(FeedDetailsPage).await
+      page(FooterTabBarPage).select_tab("Profile")
+      page(LoginPage).await
+      page(LoginPage).login("valid")
+      page(FeedDetailsPage).await
+      page(FeedDetailsPage).touch_share
+  case post
+    when "an URL" then
+      page(FeedDetailsPage).touch_choice("Submit URL")
+      page(SubmissionPage).create_post("URL title")
+      page(FeedDetailsPage).touch_choice("Contents")
+      page(SubmissionPage).create_post("URL post")
+      page(SubmissionPage).touch_discard
+    when "a Text" then
+      page(FeedDetailsPage).touch_choice("Submit Text")
+      page(SubmissionPage).create_post("text title")
+      page(FeedDetailsPage).touch_choice("Contents")
+      page(SubmissionPage).create_post("text post")
+      page(SubmissionPage).touch_discard
   end
-#--------------------------------------------
+end
+#-----------------------------------------------
 
-   
-    def verify_feed_elements
+
+#######################################
+####    Helper Methods start here     #
+####                                  #
+####                                  #
+####                                  #
+#######################################
+#--------------------------------------------
+   def verify_feed_elements
         wait_for_elements_exist([@@feedtable], :timeout => 10)
         wait_for_elements_exist([@@storycell], :timeout => 10)
         wait_for_elements_exist([@@compose], :timeout => 10)
     end
-
+#----------------------------------------------
     def touch_row
          sleeper(16)
          touch(@@story)
     end
-
+#----------------------------------------------
     def touch_rec
         sleeper(16)
         touch(@@reclabel)
     end
-
+#----------------------------------------------
     def touch_body_text
         sleeper(16)
         touch(@@bodytext)
     end
-
+#----------------------------------------------
+    def touch_choice(choice)
+      case choice
+            when "Submit Text" then 
+                  sleeper(25)
+                  touch([@@submittext])
+            when "Submit URL" then 
+                  sleeper(25)
+                  touch([@@submiturl])
+            when "Contents" then 
+                  sleeper(25)
+                  touch([@@bodytext])
+      end
+    end
+#----------------------------------------------
     def see_new
         wait_for_elements_exist(@@new, :timeout => 10)
         self
     end
-
+#----------------------------------------------
     def view_search(searchtext)
         section=0
         sleeper(10)
@@ -102,19 +136,9 @@ class FeedDetailsPage < Calabash::IBase
         section=section+1
        end
     end
-
+#----------------------------------------------
     def touch_share
-      touch(@@share)
+      touch(@@compose)
     end
-
-    def touch_choice(choice)
-      case choice
-            when "Submit Text" then 
-                  sleeper(25)
-                  touch([@@submittext])
-            when "Submit URL" then 
-                  sleeper(25)
-                  touch([@@submiturl])
-      end
-    end
+#----------------------------------------------
 end
