@@ -24,12 +24,13 @@ Scenario:  Vote on a story
 
 @subflag
 Scenario:  Flag a story
- And I succesfully flag a story   
- Then I am on the Main Feed screen
+  And I succesfully flag a story
+  Then I am on the Main Feed screen
 
 @subaction
 Scenario:  View the submitter's profile of the story you've read and see their submissions and comments
-  Then I navigte to a user's profile 
+  And I navigte to a user's profile
+  Then I am on the Main Feed screen
 
 #NOTE:The Mail app via Share Sheets crashes on the sim so there is currently no way to test this fuctionality; will test on the iPhone. 
 #NOTE: Share Sheets cannot be accessed via the sim with automation; must be tested manually. Including the scenario in the newsYC_steps.  

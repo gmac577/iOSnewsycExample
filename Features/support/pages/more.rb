@@ -49,9 +49,9 @@ class MorePage < Calabash::IBase
     @@subflag = "toolbarButton index:2"
     @@doflag = "label {text LIKE '*Flag*'}" 
     #@@doflag = "label index:6"
-    @@noprogress = "label index:9"
+    #@@noprogress = "label index:9"
     @@progress = "label {text LIKE '*Continue*'}"
-    #@@noprogress = "label {text LIKE '*Cancel*'}"
+    @@noprogress = "label {text LIKE '*Cancel*'}"
     
 
 #######################################
@@ -133,13 +133,12 @@ end
         page(MorePage).table_view
         page(MorePage).find_item
         page(MorePage).touch_subflag
-        page(MorePage).page_handler("Best Comments")
+        page(NavTabBarPage).flag_handler("Cancel")
         page(MorePage).backpage
-        page(MorePage).seemenu
         page(MorePage).select_more_actions("New Comments")
         page(MorePage).page_handler("New Comments")
         page(MorePage).backpage
-    end 
+end 
 #-----------------------------------------------
 #this is the method script for second toolbar options
     def tab_options
@@ -160,13 +159,8 @@ end
     end
 #----------------------------------------------
 	def touch_subflag
-        #wait_for_elements_exist([@@subflag], :timeout => 10)
         touch(@@subflag)
-        #wait_for_elements_exist([@@doflag], :timeout => 10)
-        touch(@@doflag)
-        sleeper(60)
-        touch(@@progress)   
-	end
+    end
 #----------------------------------------------
     def touch_goback
 	  sleeper(20)

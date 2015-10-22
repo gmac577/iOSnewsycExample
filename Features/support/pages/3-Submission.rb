@@ -78,25 +78,23 @@ class SubmissionPage < Calabash::IBase
     def sub_flag
         page(MorePage).touch_subflag
         page(NavTabBarPage).flag_handler("Cancel")
-        page(MorePage).page_handler("Main Feed")
-        page(FeedDetailsPage).touch_row
-        page(MorePage).page_handler("Submission")
         page(MorePage).touch_subflag
         page(NavTabBarPage).flag_handler("Flag")
-    end
+        sleeper(25)
+        page(MorePage).backpage
+        sleeper(16)
+     end
 #--------------------------------------------
 #viewing a users profile method
     def sub_view
         page(NavTabBarPage).select_storytab("Action")
         page(NavTabBarPage).flag_handler("Cancel")
-        page(MorePage).page_handler("Main Feed")
-        page(FeedDetailsPage).touch_row
-        page(MorePage).page_handler("Submission")
         page(NavTabBarPage).select_storytab("Action")
         page(NavTabBarPage).sub_handler
         page(SubmissionPage).verify_page_elements
         page(SubmissionPage).select_action("Submissions")
         page(SubmissionPage).select_action("Comments")
+        page(MorePage).backpage
     end
 #######################################
 ####    Helper Methods start here     #
@@ -203,13 +201,13 @@ class SubmissionPage < Calabash::IBase
         sleeper(16)
         case action
             when "reply post" then 
-            		set_text(@@textview, @@text_value)
+            	set_text(@@textview, @@text_value)
             when "search query" then 
-            		touch(@@getsearch)
-            		sleeper(16)
-            		set_text("fieldEditor index:0", @@searchtext)
-            		sleeper(25)
-            		keyboard_enter_char "Return"
+            	touch(@@getsearch)
+            	sleeper(16)
+            	set_text("fieldEditor index:0", @@searchtext)
+            	sleeper(25)
+            	keyboard_enter_char "Return"
             when "text title" then
                 set_text(@@title, @@alltitle)
             when "text post" then
@@ -218,6 +216,8 @@ class SubmissionPage < Calabash::IBase
                 set_text(@@bodytext, @@textbody)
                 sleeper(25)
                 keyboard_enter_char "Return"
+                sleeper(16)
+                touch(@@cancel)
             when "URL title" then
                 set_text(@@title, @@alltitle)
             when "URL post" then
@@ -226,6 +226,8 @@ class SubmissionPage < Calabash::IBase
                 set_text(@@url, @@urlbody)
                 sleeper(25)
                 keyboard_enter_char "Return"
+                sleeper(16)
+                touch(@@cancel)
          end
     end
 #----------------------------------------------

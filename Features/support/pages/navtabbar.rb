@@ -17,15 +17,14 @@ class NavTabBarPage < Calabash::IBase
     @@personimg = "tabBarSwappableImageView index:2"
     @@searchimg = "tabBarSwappableImageView index:3"
     @@moreimg = "tabBarSwappableImageView index:4"
-    @@progress = "label {text LIKE '*Continue*'}"
-    #@@noprogress = "label {text LIKE '*Cancel*'}" 
-    #@@doflag = "label {text LIKE '*Flag*'}" 
+    @@continue = "label {text LIKE '*Continue*'}"
+    @@cancel = "label {text LIKE '*Cancel*'}" 
+    @@doflag = "label {text LIKE '*Flag*'}" 
     @@submitter = "label {text LIKE '*Submitter*'}" 
-
     @@subflag = "toolbarButton index:2"
-    @@doflag = "label index:6"
-    @@noprogress = "label index:9"
-    @@progress = "label {text LIKE '*Continue*'}"
+    #@@doflag = "label index:6"
+    #@@noprogress = "label index:9"
+    
 
 
 #----------------------------------------------
@@ -53,7 +52,7 @@ class NavTabBarPage < Calabash::IBase
  	def vote_handler
  		sleeper(16)
  		touch(@@upvote)
- 		if element_exists([@@progress]) then
+ 		if element_exists([@@continue]) then
  			sleeper(16)
  			touch(@@progress)
  			page(MorePage).backpage
@@ -69,16 +68,9 @@ class NavTabBarPage < Calabash::IBase
 			when "Flag" then 
   		  	  touch(@@doflag)
   		  	  sleeper(25)
- 			      touch(@@progress)
- 			      page(MorePage).backpage
+ 			      touch(@@continue)
   		when "Cancel" then
-          if element_exists([@@noprogress]) then
-              sleeper(25)
-  		  	   touch(@@noprogress)
-             page(MorePage).backpage
-          else
-            page(MorePage).backpage
-          end
+  		  	   touch(@@cancel)
       end
 	end
 #----------------------------------------------
