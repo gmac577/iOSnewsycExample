@@ -13,12 +13,12 @@ Scenario: Reading the best submissions by news:yc users
   Then I am on the Hacker News menu page
 
 @moreactive
-  Scenario: Reading the active discussions by news:yc users
+  Scenario: Reading the active discussions and naviagting website
   When I read all of the Active Discussions
   Then I am on the Hacker News menu page
 
 @moreclassic
-  Scenario: Reading the archived submissions by news:yc users
+  Scenario: Reading the archived submissions and activating secaondary toolbar
   When I read all of the archived submissions
   Then I am on the Hacker News menu page
 
@@ -30,21 +30,21 @@ Scenario: Reading the best submissions by news:yc users
   Then I am on the Hacker News menu page
 
 @morecomments
-  Scenario: Reading the newest and best comments posted by news:yc users
+  Scenario: Reading the comments and flagging a comment
   When I have logged in as a user
   And I have navigated successfully to the menu page
   And I have flagged a comment
   Then I am on the Hacker News menu page
 
 @morenyc
-  Scenario: Visiting the news:yc homepage
+  Scenario: Visiting the news:yc homepage in the in-app browser
   When I touch news:yc homepage
   And I am on the news:yc homepage page
   And I return to the previous screen
   Then I am on the Hacker News menu page
 
 @moretweet
-  Scenario: Visiting the news:yc Twitter feed
+  Scenario: Visiting the news:yc Twitter feed in the in-app browser
   When I touch @news:yc Twitter 
   And I am on the @news:yc Twitter page
   And I return to the previous screen

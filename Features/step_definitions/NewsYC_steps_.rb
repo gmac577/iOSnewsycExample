@@ -69,6 +69,7 @@ end
 ########  More              #
 ########                    #
 #############################
+
 Given(/^I touch (Best Submissions|Active Discussions|Active|Classic View|Ask HN|Best Comments|New Comments|Hacker News FAQ|news:yc homepage|@news:yc Twitter)$/) do |choice|
   page(MorePage).select_more_actions(choice)
 end
@@ -113,6 +114,23 @@ Given(/^I have flagged a comment$/) do
 end 
 Given(/^I use the options on the tabbar$/) do
   page(MorePage).tab_options
+end
+#############################
+########                    #
+########  Search            #
+########                    #
+#############################
+Given(/^I can bla the bla bla bla-bla-bla$/) do 
+  page(BlaOnePage).bla_bla_bla(bla)
+end
+Given(/^I can bla the bla bla bla-bla-bla$/) do 
+  page(BlaOnePage).bla_bla_bla(bla)
+end
+Given(/^I can bla the bla bla bla-bla-bla$/) do 
+  page(BlaOnePage).bla_bla_bla(bla)
+end
+Given(/^I can bla the bla bla bla-bla-bla$/) do 
+  page(BlaOnePage).bla_bla_bla(bla)
 end
 
 #############################
@@ -169,18 +187,90 @@ Given(/^I touch the (Mail|Reminders|More|More2|Add|Copy|Read|Open) button$/) do 
   page(SubmissionPage).select_share_action(choice)
 end
 Given(/^I navigate to the Submission screen$/) do
-  page(SubmissionPage).sub_navigate
+  step "I touch the second post"
+  step "I am on the Submission screen"
 end
 Given(/^I successfully submit a post$/) do
-  page(SubmissionPage).sub_post
+  step "I touch Reply on the tab bar"
+  step "I create a reply post"
+  step "I touch Cancel"
+  step "I touch the Discard button"
 end
 Given(/^I succesfully flag a story$/) do
-  page(SubmissionPage).sub_flag
+  step "I touch Flag on the tab bar"
+  step "I touch Cancel on the menu"
+  step "I am on the Main Feed screen"
+  step "I touch the second post"
+  step "I am on the Submission screen"
+  step "I touch Flag on the tab bar"
+  step "I touch Flag on the menu"
 end
 Given(/^I navigte to a user's profile$/) do
- page(SubmissionPage).sub_view
+  step "I touch Action on the tab bar"
+  step "I touch Cancel on the menu"
+  step "I am on the Main Feed screen"
+  step "I touch the second post"
+  step "I am on the Submission screen"
+  step "I touch Action on the tab bar"
+  step "I touch Submitter on the menu"
+  step "I see the totals for karma and average"
+  step "I touch the Submissions header"
+  step "I touch the Comments header"
+end
+Given(/^I successfully send an email$/) do
+  step "I touch the Share button"
+  step "I touch the Mail button"
+  step 'I enter "email" in the "To" field'
+  step 'I enter "subject" in the "Subject" field'
+  step 'I enter "mail_reply_text" in the "Body" field'
+  step "I touch the Send button"
 end
 
+Given(/^And I successfully send a reminder%/) do
+  step "I touch the Share button"
+  step "I touch the Reminders button"
+  step 'I enter "reminder_text" in the "Body" field'
+  step "I touch Options"
+  step 'I touch the "Remind me on a day" button'
+  step "I touch Alarm"
+  step "I touch the Date column"
+  step 'I touch "Thu Dec 31'
+  step "I touch the Hour column"
+  step 'I touch "11"'
+  step "I touch the Minute column"
+  step 'I touch "59"'
+  step "I touch the Meridian column"
+  step 'I touch "PM"'
+  step "I touch Repeat"
+  step 'I touch "Every Year'
+  step 'I touch "Options'
+  step "I touch Priority"
+  step 'I touch "!!"'
+  step "I touch Notes"
+  step 'I enter "notes_text" in the "Notes" field'
+  step "I touch Reminder in the header"
+  step "I touch Add"
+end
+Given(/^I test the rest of the Share Sheet options%/) do
+  step "I touch the Share button"
+  step "I touch the More button"
+  step "I touch Done"
+  step "I touch the Share button"
+  step "I touch the Add button"
+  step "I touch the Share button"
+  step "I touch Copy"
+  step "I touch the Share button"
+  step "I touch the Read button"
+  step "I touch Cancel"
+  step "I touch the Share button"
+  step "I touch Open"
+  step 'I see the article from "news.ycombinator.com" in Safari'
+  step 'I touch the "Back to news:yc" button in the header'
+  step 'I touch the Share button'
+  step 'I touch the More2 button'
+  step 'I touch Done'
+  step 'I touch Cancel'
+end
 
 
 

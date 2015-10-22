@@ -18,9 +18,14 @@ class NavTabBarPage < Calabash::IBase
     @@searchimg = "tabBarSwappableImageView index:3"
     @@moreimg = "tabBarSwappableImageView index:4"
     @@progress = "label {text LIKE '*Continue*'}"
-    @@noprogress = "label {text LIKE '*Cancel*'}" 
-    @@doflag = "label {text LIKE '*Flag*'}" 
+    #@@noprogress = "label {text LIKE '*Cancel*'}" 
+    #@@doflag = "label {text LIKE '*Flag*'}" 
     @@submitter = "label {text LIKE '*Submitter*'}" 
+
+    @@subflag = "toolbarButton index:2"
+    @@doflag = "label index:6"
+    @@noprogress = "label index:9"
+    @@progress = "label {text LIKE '*Continue*'}"
 
 
 #----------------------------------------------
@@ -63,12 +68,12 @@ class NavTabBarPage < Calabash::IBase
   		case action
 			when "Flag" then 
   		  	  touch(@@doflag)
-  		  	  sleeper(16)
+  		  	  sleeper(25)
  			      touch(@@progress)
  			      page(MorePage).backpage
   		when "Cancel" then
           if element_exists([@@noprogress]) then
-              sleeper(16)
+              sleeper(25)
   		  	   touch(@@noprogress)
              page(MorePage).backpage
           else

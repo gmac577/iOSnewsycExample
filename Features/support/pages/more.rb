@@ -48,10 +48,11 @@ class MorePage < Calabash::IBase
     @@detailstitle = "label index:1"
     @@subflag = "toolbarButton index:2"
     @@doflag = "label {text LIKE '*Flag*'}" 
+    #@@doflag = "label index:6"
+    @@noprogress = "label index:9"
     @@progress = "label {text LIKE '*Continue*'}"
-    @@noprogress = "label {text LIKE '*Cancel*'}"
-  
-
+    #@@noprogress = "label {text LIKE '*Cancel*'}"
+    
 
 #######################################
 ####    Master Methods start here     #
@@ -159,11 +160,11 @@ end
     end
 #----------------------------------------------
 	def touch_subflag
-        wait_for_elements_exist([@@subflag], :timeout => 10)
+        #wait_for_elements_exist([@@subflag], :timeout => 10)
         touch(@@subflag)
-        sleeper(12)
+        #wait_for_elements_exist([@@doflag], :timeout => 10)
         touch(@@doflag)
-        sleeper(20)
+        sleeper(60)
         touch(@@progress)   
 	end
 #----------------------------------------------
