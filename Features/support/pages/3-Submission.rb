@@ -28,6 +28,7 @@ class SubmissionPage < Calabash::IBase
     @@submissions = "tableViewCell {text LIKE '*Submissions*'}"
     @@submission = "label {text LIKE '*Submission*'}"
     @@comments = "tableViewCell {text LIKE '*Comments*'}"
+    @@saved = "tableViewCell {text LIKE '*Saved*'}"
     @@prof = "label {text LIKE '*Profile*'}"
     @@share = "label {text LIKE '*Share*'}"
 	@@mail = "label {text LIKE '*Mail*'}"
@@ -140,12 +141,16 @@ class SubmissionPage < Calabash::IBase
             when "Submissions" then 
             		touch(@@submissions)
                     sleeper(20)
-            		touch(@@prof)
+            		page(MorePage).backpage
             when "Comments" then
             	    touch(@@comments)
             	    sleeper(20)
-            		touch(@@prof)
-        end
+            		page(MorePage).backpage
+            when "Saved"
+                    touch(@@saved)
+                    sleeper(20)
+                    page(MorePage).backpage
+            end
     end
 #----------------------------------------------
      def select_share_action(choice)

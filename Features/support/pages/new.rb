@@ -1,6 +1,6 @@
 require 'calabash-cucumber/ibase'
 
-class FeedDetailsPage < Calabash::IBase
+class NewFeedDetailsPage < Calabash::IBase
 
     include FormHelper
     include PagePopulator  
@@ -42,21 +42,22 @@ class FeedDetailsPage < Calabash::IBase
 #-----------------------------------------------
 #this is the method script for successful URL submit
 
-def post_success(post)
-      page(FeedDetailsPage).await
+def newpost_success(post)
+      page(NewFeedDetailsPage).await
       page(FooterTabBarPage).select_tab("Profile")
       page(LoginPage).await
       page(LoginPage).login("valid")
       page(FeedDetailsPage).await
+      page(FooterTabBarPage).select_tab("New")
       page(FeedDetailsPage).touch_share
   case post
-    when "an URL" then
+    when "a new URL" then
       page(FeedDetailsPage).touch_choice("Submit URL")
       page(SubmissionPage).create_post("URL title")
       page(FeedDetailsPage).touch_choice("Contents")
       page(SubmissionPage).create_post("URL post")
       page(SubmissionPage).touch_discard
-    when "a Text" then
+    when "a new Text" then
       page(FeedDetailsPage).touch_choice("Submit Text")
       page(SubmissionPage).create_post("text title")
       page(FeedDetailsPage).touch_choice("Contents")
@@ -65,7 +66,13 @@ def post_success(post)
   end
 end
 #-----------------------------------------------
-
+def read_new
+ page(FooterTabBarPage).select_tab("New")
+ page(NewFeedDetailsPage).await
+ page(FeedDetailsPage).touch_row
+ page(MorePage).page_handler("Submission")
+ page(MorePage).backpage
+end
 
 #######################################
 ####    Helper Methods start here     #
@@ -107,6 +114,11 @@ end
                   sleeper(25)
                   touch([@@bodytext])
       end
+    end
+#----------------------------------------------
+    def see_new
+        wait_for_elements_exist(@@new, :timeout => 10)
+        self
     end
 #----------------------------------------------
 

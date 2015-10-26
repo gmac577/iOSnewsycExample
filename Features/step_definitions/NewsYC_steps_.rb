@@ -28,6 +28,9 @@ end
 Given(/^I touch Cancel$/) do 
   page(LoginPage).touch_cancel
 end
+Given(/^I navigate to my profile$/) do
+  page(LoginPage).profile_view
+end
 #############################
 ########                    #
 ########  Main Feed         #
@@ -50,10 +53,13 @@ Given(/^I touch Recent on the header$/) do
   page(FeedDetailsPage).touch_rec
 end
 Given(/^I create a successful search$/) do
-  page(FeedDetailsPage).search_success
+  page(SearchPage).search_success
 end
 Given(/^I successfully submit (an URL|a Text)$/) do |post|
   page(FeedDetailsPage).post_success(post)
+end
+Given(/^I submit (a new URL|a new Text)$/) do |post|
+  page(NewFeedDetailsPage).newpost_success(post)
 end
 Given(/^I touch Share on the header$/) do
   page(FeedDetailsPage).touch_share
@@ -63,6 +69,12 @@ Given(/^I touch (Submit URL|Submit Text|Contents)$/) do |choice|
 end
 Given(/^I enter "title_text" in the title text field$/) do
   page(FeedDetailsPage).enter_title
+end
+Given(/^I read a story on the New feed$/) do
+  page(NewFeedDetailsPage).read_new
+end
+Given(/^I do a search$/) do
+ page(SearchPage).read_search
 end
 #############################
 ########                    #

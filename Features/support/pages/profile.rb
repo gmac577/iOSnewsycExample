@@ -20,6 +20,7 @@ end
 @@signin = "navigationButton index:1"
 @@continue = "view marked: 'Continue'"
 @@badprompt = "label {text LIKE 'Unable to Authenticate'}"
+@@saved = "tableViewCell {text LIKE '*Saved*'}"
 
 
 #######################################
@@ -48,6 +49,16 @@ def login_success
   page(FeedDetailsPage).await
 end
 #-----------------------------------------------
+#viewing a users profile method
+def profile_view
+  sleeper(25)
+  page(FooterTabBarPage).select_tab("Profile")
+  sleeper(25)
+  page(SubmissionPage).verify_page_elements
+  page(SubmissionPage).select_action("Submissions")
+  page(SubmissionPage).select_action("Comments")
+  page(SubmissionPage).select_action("Saved")
+end
 
 
 #######################################

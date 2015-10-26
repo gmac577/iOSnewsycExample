@@ -1,6 +1,6 @@
 require 'calabash-cucumber/ibase'
 
-class FeedDetailsPage < Calabash::IBase
+class SearchPage < Calabash::IBase
 
     include FormHelper
     include PagePopulator  
@@ -40,7 +40,24 @@ class FeedDetailsPage < Calabash::IBase
 #######################################
 
 #-----------------------------------------------
-#this is the method script for successful URL submit
+#this is the method script for a succesful search
+
+def search_success
+  page(SubmissionPage).create_post("search query")
+  page(FeedDetailsPage).view_search("Microsoft")
+  page(FeedDetailsPage).touch_rec
+  page(FeedDetailsPage).view_search("Microsoft")
+end
+#-----------------------------------------------
+
+def read_search
+  page(SubmissionPage).create_post("search query")
+  page(FeedDetailsPage).touch_row
+  page(SubmissionPage).await
+  page(MorePage).backpage
+end
+#-----------------------------------------------
+#this is the method script for successful URL or post submit
 
 def post_success(post)
       page(FeedDetailsPage).await
@@ -109,7 +126,22 @@ end
       end
     end
 #----------------------------------------------
-
+    def see_new
+        wait_for_elements_exist(@@new, :timeout => 10)
+        self
+    end
+#----------------------------------------------
+    def view_search(searchtext)
+        section=0
+        sleeper(10)
+        each_cell(:animate => false, :post_scroll => 0.2) do |row, sec|
+            if query("tableViewCell indexPath:#{row},#{sec} label", :searchtext).first==searchtext
+                break # if text found break from loop
+            end
+        section=section+1
+       end
+    end
+#----------------------------------------------
     def touch_share
       touch(@@compose)
     end
