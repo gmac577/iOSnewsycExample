@@ -74,7 +74,7 @@ end
 ####                                  #
 #######################################
 #--------------------------------------------
-   def verify_feed_elements
+    def verify_feed_elements
         wait_for_elements_exist([@@feedtable], :timeout => 10)
         wait_for_elements_exist([@@storycell], :timeout => 10)
         wait_for_elements_exist([@@compose], :timeout => 10)
@@ -89,11 +89,13 @@ end
         sleeper(16)
         touch(@@reclabel)
     end
+
 #----------------------------------------------
     def touch_body_text
         sleeper(16)
         touch(@@bodytext)
     end
+    
 #----------------------------------------------
     def touch_choice(choice)
       case choice

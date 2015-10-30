@@ -48,8 +48,6 @@ class MorePage < Calabash::IBase
     @@detailstitle = "label index:1"
     @@subflag = "toolbarButton index:2"
     @@doflag = "label {text LIKE '*Flag*'}" 
-    #@@doflag = "label index:6"
-    #@@noprogress = "label index:9"
     @@progress = "label {text LIKE '*Continue*'}"
     @@noprogress = "label {text LIKE '*Cancel*'}"
     

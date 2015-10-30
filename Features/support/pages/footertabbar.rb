@@ -30,5 +30,6 @@ class FooterTabBarPage < Calabash::IBase
         wait_for_elements_exist([@@tabbar], :timeout => 10)
     	touch(@@tabbar + " index: #{index}")
     end
+    
 #----------------------------------------------
  end

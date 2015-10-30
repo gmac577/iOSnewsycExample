@@ -15,6 +15,7 @@ class SubmissionPage < Calabash::IBase
         self
     end
 
+
     @@back = "label {text LIKE 'Hacker News'}"
    	@@goback = "navigationBarBackIndicatorView"
    	@@cancel = "label {text LIKE 'Cancel'}"
@@ -66,6 +67,7 @@ class SubmissionPage < Calabash::IBase
         page(FeedDetailsPage).touch_row
         page(MorePage).page_handler("Submission")
     end
+
 #--------------------------------------------
 #posting a reply method
     def sub_post
@@ -74,6 +76,7 @@ class SubmissionPage < Calabash::IBase
         page(NavTabBarPage).flag_handler("Cancel")
         page(SubmissionPage).touch_discard
     end
+
 #--------------------------------------------
 #flagging a story method
     def sub_flag
@@ -85,6 +88,7 @@ class SubmissionPage < Calabash::IBase
         page(MorePage).backpage
         sleeper(16)
      end
+
 #--------------------------------------------
 #viewing a users profile method
     def sub_view
@@ -97,6 +101,7 @@ class SubmissionPage < Calabash::IBase
         page(SubmissionPage).select_action("Comments")
         page(MorePage).backpage
     end
+    
 #######################################
 ####    Helper Methods start here     #
 ####                                  #

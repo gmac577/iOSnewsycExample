@@ -22,11 +22,7 @@ class NavTabBarPage < Calabash::IBase
     @@doflag = "label {text LIKE '*Flag*'}" 
     @@submitter = "label {text LIKE '*Submitter*'}" 
     @@subflag = "toolbarButton index:2"
-    #@@doflag = "label index:6"
-    #@@noprogress = "label index:9"
-    
-
-
+   
 #----------------------------------------------
   def select_storytab(index)
         case index

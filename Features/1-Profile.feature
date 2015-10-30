@@ -1,5 +1,5 @@
 @profile
-Feature: Login
+Feature: Profile
   As a News:yc user
   I want to be able to login and see my profile
   So I can begin adding comments and managing my account

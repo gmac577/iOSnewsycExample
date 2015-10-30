@@ -49,6 +49,7 @@ def login_success
   page(FeedDetailsPage).await
 end
 #-----------------------------------------------
+
 #viewing a users profile method
 def profile_view
   sleeper(25)

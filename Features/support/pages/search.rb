@@ -81,6 +81,7 @@ def post_success(post)
       page(SubmissionPage).touch_discard
   end
 end
+
 #-----------------------------------------------
 
 
@@ -91,7 +92,7 @@ end
 ####                                  #
 #######################################
 #--------------------------------------------
-   def verify_feed_elements
+    def verify_feed_elements
         wait_for_elements_exist([@@feedtable], :timeout => 10)
         wait_for_elements_exist([@@storycell], :timeout => 10)
         wait_for_elements_exist([@@compose], :timeout => 10)
@@ -146,4 +147,6 @@ end
       touch(@@compose)
     end
 #----------------------------------------------
+
+
 end

@@ -32,6 +32,8 @@ class NewFeedDetailsPage < Calabash::IBase
     @@bodytext = "PlaceholderTextView index:0"
     @@discard = "label {text LIKE '*Discard*'}"
 
+    
+
 #######################################
 ####    Master Methods start here     #
 ####                                  #
